@@ -1,4 +1,5 @@
 import React from 'react';
+import bannerImg from '../assets/banner3.jpg';
 
 const Banner: React.FC = () => {
   return (
@@ -6,7 +7,7 @@ const Banner: React.FC = () => {
       {/* Background image with overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-primary-900/80 to-primary-900/50 z-0">
         <img
-          src= "./src/assets/banner3.jpg"
+          src={bannerImg}
           alt="banner2"
           className="w-full h-full object-cover mix-blend-overlay"
         />

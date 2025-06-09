@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Instagram, Facebook, Mail, Phone, MapPin, Send } from 'lucide-react';
 import emailjs from 'emailjs-com';
+import whatsappIcon from '../assets/icons/icon-whatsapp.svg';
 
 const Footer: React.FC = () => {
   const formRef = useRef<HTMLFormElement>(null);
@@ -182,7 +183,7 @@ const Footer: React.FC = () => {
                   aria-label="WhatsApp"
                 >
                   <img
-                    src="./src/assets/icons/icon-whatsapp.svg"
+                    src={whatsappIcon}
                     className="w-6 h-6"
                     alt="WhatsApp"
                   />

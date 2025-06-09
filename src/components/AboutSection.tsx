@@ -1,4 +1,5 @@
 import React from 'react';
+import aboutImg from '../assets/aboutUsBanner.jpg';
 
 const AboutSection: React.FC = () => {
   return (
@@ -25,7 +26,7 @@ const AboutSection: React.FC = () => {
           <div className="lg:w-1/2 relative">
             <div className="relative h-80 lg:h-96 rounded-xl overflow-hidden shadow-xl">
               <img 
-                src="./src/assets/aboutUsBanner.jpg" 
+                src={aboutImg}
                 alt="Equipe Mais Sabor" 
                 className="w-full h-full object-cover"
               />

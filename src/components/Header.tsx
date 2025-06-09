@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import logoImg from '../assets/LogoImg.png';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -28,7 +29,7 @@ const Header: React.FC = () => {
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center">
           <img 
-            src= "./src/assets/LogoImg.png"
+            src={logoImg}
             alt="Cubos de gelo coloridos"
             className="w-12 h-12 rounded-full"
             //tamanho
