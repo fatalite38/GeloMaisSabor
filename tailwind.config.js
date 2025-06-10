@@ -68,9 +68,6 @@ export default {
       fontFamily: {
         nunito: ['Nunito', 'sans-serif'],
       },
-      backgroundImage: {
-        'ice-pattern': "url('https://images.pexels.com/photos/1323828/pexels-photo-1323828.jpeg?auto=compress&cs=tinysrgb&w=1600')",
-      },
       keyframes: {
         wiggle: {
           '0%, 100%': { transform: 'rotate(-3deg)' },
@@ -80,10 +77,6 @@ export default {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-10px)' },
         },
-      },
-      animation: {
-        wiggle: 'wiggle 1s ease-in-out infinite',
-        float: 'float 3s ease-in-out infinite',
       },
     },
   },

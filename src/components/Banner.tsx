@@ -5,7 +5,7 @@ const Banner: React.FC = () => {
   return (
     <section id="home" className="relative min-h-screen flex items-center">
       {/* Background image with overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-primary-900/80 to-primary-900/50 z-0">
+      <div className="absolute inset-0 bg-gradient-to-b from-primary-900 to-primary-900/30 z-0">
         <img
           src={bannerImg}
           alt="banner2"

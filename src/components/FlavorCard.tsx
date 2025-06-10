@@ -11,7 +11,7 @@ const FlavorCard: React.FC<FlavorCardProps> = ({ flavor, isActive, onClick }) =>
   return (
     <div 
       className={`rounded-xl overflow-hidden shadow-lg transition-all duration-300 transform hover:scale-105 cursor-pointer ${
-        isActive ? 'scale-105 ring-4 ring-primary-500' : ''
+        isActive ? 'scale-105 ring-4 ring-primary-800' : ''
       }`}
       onClick={onClick}
     >

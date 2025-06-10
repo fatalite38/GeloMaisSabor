@@ -34,7 +34,7 @@ const TestimonialsSection: React.FC = () => {
     <section id="depoimentos" className="py-20 bg-gradient-to-b from-white to-blue-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="font-nunito font-bold text-4xl text-primary-700 mb-4">O que dizem nossos clientes</h2>
+          <h2 className="font-nunito font-bold text-4xl text-primary-800 mb-4">O que dizem nossos clientes</h2>
           <p className="font-nunito text-gray-600 text-xl max-w-2xl mx-auto">
             Veja o que nossos clientes estão falando sobre a experiência com o gelo saborizado Mais Sabor
           </p>

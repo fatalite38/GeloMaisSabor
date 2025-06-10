@@ -26,7 +26,7 @@ const flavors: Flavor[] = [
     name: 'Coco',
     color: 'bg-white-500',
     bgColor: 'bg-white/80',
-    hoverColor: 'hover:bg-blue-300',
+    hoverColor: 'hover:bg-blue-600',
     image: cocoImg,
     description: 'Refrescante e cremoso, com notas tropicais de coco fresco.'
   },
@@ -35,7 +35,7 @@ const flavors: Flavor[] = [
     name: 'Maracujá',
     color: 'bg-passion-500',
     bgColor: 'bg-white/80',
-    hoverColor: 'hover:bg-passion-500',
+    hoverColor: 'hover:bg-passion-600',
     image: maracujaImg,
     description: 'Sabor cítrico e doce, perfeito para bebidas refrescantes.'
   },
@@ -53,7 +53,7 @@ const flavors: Flavor[] = [
     name: 'Morango',
     color: 'bg-white-500',
     bgColor: 'bg-white/80',
-    hoverColor: 'hover:bg-red-500',
+    hoverColor: 'hover:bg-red-600',
     image: morangoImg,
     description: 'Doce e aromático, com o sabor autêntico de morangos frescos.'
   },
@@ -62,7 +62,7 @@ const flavors: Flavor[] = [
     name: 'Maçã-Verde',
     color: 'bg-white-500',
     bgColor: 'bg-white/80',
-    hoverColor: 'hover:bg-lime-500',
+    hoverColor: 'hover:bg-lime-600',
     image: macaVerdeImg,
     description: 'Refrescante e levemente ácido, com o sabor característico da maçã verde.'
   },
@@ -71,7 +71,7 @@ const flavors: Flavor[] = [
     name: 'Laranja',
     color: 'bg-white-500',
     bgColor: 'bg-white/80',
-    hoverColor: 'hover:bg-orange-500',
+    hoverColor: 'hover:bg-orange-600',
     image: laranjaImg,
     description: 'Cítrico e refrescante, com o sabor autêntico da laranja.'
   },
@@ -80,7 +80,7 @@ const flavors: Flavor[] = [
     name: 'Uva',
     color: 'bg-white-500',
     bgColor: 'bg-white/80',
-    hoverColor: 'hover:bg-grape-500',
+    hoverColor: 'hover:bg-purple-800',
     image: uvaImg,
     description: 'Aroma envolvente e sabor marcante de uva fresca e suculenta.'
   },
@@ -89,7 +89,7 @@ const flavors: Flavor[] = [
     name: 'Abacaxi',
     color: 'bg-white-500',
     bgColor: 'bg-white/80',
-    hoverColor: 'hover:bg-pineapple-500',
+    hoverColor: 'hover:bg-pineapple-600',
     image: abacaxiImg,
     description: 'Doce e refrescante, com o sabor tropical do abacaxi.'
   }
@@ -99,10 +99,10 @@ const FlavorsSection: React.FC = () => {
   const [activeFlavor, setActiveFlavor] = useState<Flavor | null>(null);
 
   return (
-    <section id="sabores" className="py-20 bg-gradient-to-b from-white to-blue-50">
+    <section id="produtos" className="py-20 bg-gradient-to-b from-white to-blue-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="font-nunito font-bold text-4xl text-primary-700 mb-4">Nossos Sabores</h2>
+          <h2 className="font-nunito font-bold text-4xl text-primary-800 mb-4">Nossos Sabores</h2>
           <p className="font-nunito text-gray-600 text-xl max-w-2xl mx-auto">
             Descubra nossa variedade de sabores tropicais que vão transformar suas bebidas em experiências únicas
           </p>

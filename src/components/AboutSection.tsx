@@ -1,24 +1,24 @@
 import React from 'react';
-import aboutImg from '../assets/aboutUsBanner.jpg';
+import aboutImg from '../assets/bannerImg.jpg';
 
 const AboutSection: React.FC = () => {
   return (
-    <section id="sobre" className="py-20 bg-gradient-to-b from-white to-blue-50">
+    <section id="sobre" className="py-20 bg-gradient-to-b from-primary-900 to bg-primary-800 ">
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row items-center">
           <div className="lg:w-1/2 mb-10 lg:mb-0 lg:pr-10">
-            <h2 className="font-nunito font-bold text-4xl text-primary-700 mb-6">Sobre Nós</h2>
-            <p className="font-nunito text-gray-600 text-lg mb-6">
+            <h2 className="font-nunito font-bold text-4xl text-white mb-6">Sobre Nós</h2>
+            <p className="font-nunito text-white text-600 text-lg mb-6">
               Fundada em Setembro de 2021 na cidade de Botucatu-SP, a Mais Sabor nasceu da inspiração de seu
               idealizador, Fernando Pedrozo, que enxergou no gelo saborizado uma oportunidade de inovar e surpreender.
             </p>
-            <p className="font-nunito text-gray-600 text-lg mb-6">
+            <p className="font-nunito text-white text-600 text-lg mb-6">
               Desde então, temos nos dedicado ao desenvolvimento de produtos que unem qualidade, praticidade e sabor. Nossos gelos saborizados são produzidos com ingredientes selecionados e passam por um rigoroso controle de qualidade, garantindo uma experiência premium ao consumidor.
             </p>
-            <p className="font-nunito text-gray-600 text-lg">
+            <p className="font-nunito text-white text-600 text-lg">
               Atuamos em diversos segmentos, atendendo festas, casamentos, eventos corporativos, depósitos, adegas e o consumidor final que busca novas formas de tornar seus momentos mais agradáveis e refrescantes.
             </p>
-            <p className="font-nunito text-gray-600 text-lg">
+            <p className="font-nunito text-white text-600 text-lg">
               <br />Acreditamos que cada detalhe faz diferença. Por isso, a Mais Sabor não entrega apenas gelo, mas  entregamos inovação, cuidado e um novo conceito de sabor para os seus momentos.
             </p>
           </div>

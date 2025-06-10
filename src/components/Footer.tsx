@@ -56,7 +56,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer id="contato" className="bg-primary-800 text-white pt-16 pb-8">
+    <footer id="contato" className="from bg-primary-800 text-white pt-16 pb-8">
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap -mx-4">
           {/* Formulário de Contato */}

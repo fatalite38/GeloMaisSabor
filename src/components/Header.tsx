@@ -40,9 +40,6 @@ const Header: React.FC = () => {
               isScrolled ? 'text-primary-600' : 'text-white'
             }`}
           >
-            {/* <Instagram size={25} className="text-gray-700 mr-2" />
-            <Facebook size={25} className="text-gray-700 mr-2" /> */}
-         
           </span>
         </div>
 
@@ -88,7 +85,7 @@ const Header: React.FC = () => {
         >
           <div className="flex flex-col items-center justify-center h-full">
             <ul className="text-center space-y-8">
-              {['Home', 'Sobre', 'Sabores', 'Depoimentos', 'Contato'].map((item) => (
+              {['Home', 'Produtos', 'Sobre', 'Depoimentos', 'Contato'].map((item) => (
                 <li key={item}>
                   <a
                     href={`#${item.toLowerCase()}`}
