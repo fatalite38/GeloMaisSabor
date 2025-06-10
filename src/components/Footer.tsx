@@ -177,7 +177,7 @@ const Footer: React.FC = () => {
                   <Facebook size={24} />
                 </a>
                 <a
-                  href="https://api.whatsapp.com/send?phone=5514997445680&text=Olá,%20gostaria%20de%20fazer%20um%20pedido?"
+                  href="https://api.whatsapp.com/send?phone=5514997445680&text=Olá,%20gostaria%20de%20obter%20mais%20informações%20sobre%20os%20seus%20produtos."
                   target="blank"
                   className="bg-primary-700 hover:bg-primary-800 p-3 rounded-full transition-all duration-300 hover:scale-110"
                   aria-label="WhatsApp"
