@@ -27,7 +27,7 @@ const Banner: React.FC = () => {
         <button
           className="bg-pineapple-500 hover:bg-pineapple-600 text-primary-800 font-nunito font-bold text-lg px-8 py-3 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg"
         >
-          <a href="#sabores">Experimente Agora</a>
+          <a href="#produtos">Experimente Agora</a>
         </button>
       </div>
     </section>

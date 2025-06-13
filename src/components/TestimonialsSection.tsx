@@ -26,6 +26,24 @@ const testimonials: Testimonial[] = [
     name: 'João Marques',
     rating: 5,
     comment: 'Uso o gelo saborizado de melancia para fazer meu suco. É um sucesso aqui em casa!'
+  },
+  {
+  id: 4,
+  name: 'Renata Lima',
+  rating: 4,
+  comment: 'Gostei bastante do gelo de limão, deixou minha água com gás super refrescante.'
+  },
+  {
+  id: 5,
+  name: 'Leonardo Batista',
+  rating: 5,
+  comment: 'Entrega rápida, embalagem impecável e o sabor surpreendeu demais. Excelente produto!'
+  },
+  {
+  id: 6,
+  name: 'Camila Duarte',
+  rating: 5,
+  comment: 'O gelo de morango é delicioso e perfuma a bebida. Recomendo para todos!'
   }
 ];
 
@@ -40,7 +58,7 @@ const TestimonialsSection: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((testimonial) => (
             <TestimonialCard key={testimonial.id} testimonial={testimonial} />
           ))}
