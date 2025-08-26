@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Instagram, Facebook, Mail, Phone, MapPin, Send } from 'lucide-react';
 import emailjs from 'emailjs-com';
 import whatsappIcon from '../assets/icons/icon-whatsapp.svg';
+// import ifoodLogo from '../assets/IFood_logo.png';
 
 const Footer: React.FC = () => {
   const formRef = useRef<HTMLFormElement>(null);
@@ -56,7 +57,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer id="contato" className="from bg-primary-800 text-white pt-16 pb-8">
+    <footer id="contato" className="from bg-primary-800 text-white pt-32 pb-8">
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap -mx-4">
           {/* Formulário de Contato */}
@@ -148,14 +149,16 @@ const Footer: React.FC = () => {
                 </div>
 
                 <div className="flex items-center">
-                  <Phone className="mr-3 text-pineapple-500 flex-shrink-0" />
-                  <p className="font-nunito">(14) 99744-5680</p>
-                </div>
-
-                <div className="flex items-center">
                   <Mail className="mr-3 text-pineapple-500 flex-shrink-0" />
                   <p className="font-nunito">gelomaissabor@hotmail.com</p>
                 </div>
+
+                <div className="flex items-center">
+                  <Phone className="mr-3 mt-3 text-pineapple-500 flex-shrink-0" />
+                  <p className="mt-3 font-nunito">(14) 99744-5680</p>
+                </div>
+
+                
               </div>
 
               <h3 className="font-nunito font-bold text-2xl mb-4">Siga-nos</h3>
@@ -189,12 +192,27 @@ const Footer: React.FC = () => {
                   />
                 </a>
               </div>
+              {/* <h3 className="font-nunito font-bold text-2xl mb-4 mt-8 ">Disponível no iFood</h3>
+                  <div className="flex space-x-4">
+                    {/* <a
+                      href="https://www.ifood.com.br/delivery/botucatu-sp/gelo-mais-sabor-jardim-paraiso/7852c14e-ad45-42b9-a368-9ed8d6343a5a"
+                      target="blank"
+                      className="bg-primary-700 hover:bg-primary-50 p-3 rounded-2xl transition-all duration-300 hover:scale-110"
+                      aria-label="ifood"
+                    >
+                      <img
+                        src={ifoodLogo}
+                        className="w-12 h-6"
+                        alt="ifood"
+                      />
+                    </a> 
+                  </div> */}
             </div>
           </div>
         </div>
 
         {/* Rodapé */}
-        <div className="border-t border-primary-500 mt-12 pt-8 text-center">
+        <div className="border-t border-primary-500 mt-20 pt-8 text-center">
           <p className="font-nunito text-sm text-primary-200">
             &copy; {new Date().getFullYear()} Mais Sabor. Todos os direitos reservados.
             <br />

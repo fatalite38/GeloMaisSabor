@@ -68,10 +68,10 @@ const Header: React.FC = () => {
           aria-label="Toggle menu"
         >
           {isMenuOpen ? (
-            <X size={28} className="text-gray-700" />
+            <X size={30} className="text-white" />
           ) : (
-            <Menu 
-              size={28} 
+            <Menu
+              size={30} 
               className={`${isScrolled ? 'text-gray-700' : 'text-white'}`} 
             />
           )}
@@ -79,17 +79,17 @@ const Header: React.FC = () => {
 
         {/* Mobile Navigation */}
         <div
-          className={`fixed inset-0 bg-white z-40 transform transition-transform duration-300 ease-in-out ${
+          className={`fixed inset-0 bg-gray-800 bg-opacity-95 flex flex-col items-center justify-center text-gray-700 z-40 transform transition-transform duration-300 ease-in-out ${
             isMenuOpen ? 'translate-x-0' : 'translate-x-full'
           } md:hidden`}
         >
           <div className="flex flex-col items-center justify-center h-full">
-            <ul className="text-center space-y-8">
+            <ul className="text-center space-y-10">
               {['Home', 'Produtos', 'Sobre', 'Depoimentos', 'Contato'].map((item) => (
                 <li key={item}>
                   <a
                     href={`#${item.toLowerCase()}`}
-                    className="font-nunito text-2xl font-semibold text-gray-700 hover:text-primary-500 transition-colors"
+                    className="font-nunito text-2xl font-bold text-gray-200 hover:text-primary-500 transition-colors"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {item}

@@ -11,39 +11,39 @@ interface Testimonial {
 const testimonials: Testimonial[] = [
   {
     id: 1,
-    name: 'Larissa Vieira',
+    name: 'Thais',
     rating: 5,
-    comment: 'Experimentei o gelo saborizado de maracujá e fiquei impressionado! O sabor é simplesmente incrível.'
+    comment: 'O Melhor Gelo Saborizado de Todos os Tempos: Sabor, Qualidade e Variedade Incomparáveis.'
   },
   {
     id: 2,
-    name: 'Marcos Aurélio',
+    name: 'Willian',
     rating: 5,
-    comment: 'O gelo de coco transformou completamente minhas bebidas aqui na adega. Recomendo muito!'
+    comment: 'O melhor gelo de sabor de Botucatu e região, com muito sabor e qualidade'
   },
   {
     id: 3,
-    name: 'João Marques',
+    name: 'Leonardo',
     rating: 5,
-    comment: 'Uso o gelo saborizado de melancia para fazer meu suco. É um sucesso aqui em casa!'
-  },
-  {
-  id: 4,
-  name: 'Renata Lima',
-  rating: 4,
-  comment: 'Gostei bastante do gelo de limão, deixou minha água com gás super refrescante.'
+    comment: ' Gelo com a melhor qualidade. O gelo não derrete rápido e o sabor é top!'
   },
   {
   id: 5,
-  name: 'Leonardo Batista',
+  name: 'Boto Gelo',
+  rating: 5,
+  comment: 'Ótimo atendimento e produto muito bom, sem comparação. Com certeza o melhor do mercado!'
+  },
+  {
+  id: 5,
+  name: 'Livia',
   rating: 5,
   comment: 'Entrega rápida, embalagem impecável e o sabor surpreendeu demais. Excelente produto!'
   },
   {
   id: 6,
-  name: 'Camila Duarte',
+  name: 'Danilo',
   rating: 5,
-  comment: 'O gelo de morango é delicioso e perfuma a bebida. Recomendo para todos!'
+  comment: 'Atendimento e produto diferenciado'
   }
 ];
 
@@ -63,8 +63,15 @@ const TestimonialsSection: React.FC = () => {
             <TestimonialCard key={testimonial.id} testimonial={testimonial} />
           ))}
         </div>
+          <button
+                  type="button"
+                  className="px-6 py-4 bg-white border-pineapple-600 hover:bg-pineapple-600 text-primary-800 font-nunito font-bold rounded-lg transition-all duration-300 flex items-center align-middle transform hover:scale-105 shadow-lg mt-12 mx-auto"
+                >
+                  <a href="https://g.page/r/CVFHEu7L1Z_zEAI/review" target="_blank" rel="noopener noreferrer">Deixe sua avaliação aqui!</a>
+                </button>
       </div>
     </section>
+    
   );
 };
 
