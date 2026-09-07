@@ -4,6 +4,22 @@ export default {
   theme: {
     extend: {
       colors: {
+        ink: {
+          950: '#000000',
+          900: '#0d120f',
+          800: '#151d18',
+          700: '#223028',
+        },
+        cuesta: {
+          50: '#edf8ff',
+          100: '#d8efff',
+          300: '#0094f6',
+          400: '#007fd8',
+          500: '#0068b8',
+          600: '#005496',
+          700: '#003f73',
+        },
+        cream: '#f7f7f2',
         primary: {
           50: '#e6f9ff',
           100: '#ccf3ff',
@@ -66,7 +82,8 @@ export default {
         }
       },
       fontFamily: {
-        nunito: ['Nunito', 'sans-serif'],
+        nunito: ['Poppins', 'sans-serif'],
+        display: ['Poppins', 'sans-serif'],
       },
       keyframes: {
         wiggle: {
