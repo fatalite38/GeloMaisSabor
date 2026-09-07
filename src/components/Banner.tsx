@@ -43,15 +43,15 @@ const Banner: React.FC = () => (
       <div className="relative mx-auto w-full max-w-3xl pt-8 lg:pt-0">
         <div className="absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cuesta-300/20 blur-3xl" aria-hidden="true" />
         <div className="relative grid grid-cols-3 items-end gap-2 sm:gap-5">
-          <figure className="-rotate-3 overflow-hidden rounded-[1.5rem] bg-white p-2 shadow-2xl shadow-black/50 transition-transform duration-500 hover:-translate-y-2 hover:rotate-0 sm:rounded-[2rem] sm:p-3">
-            <img src={maracujaImg} alt="Nova embalagem Coco Cuesta sabor Maracujá" className="aspect-[0.47] w-full rounded-[1.1rem] object-cover sm:rounded-[1.5rem]" />
+          <figure className="-rotate-3 transition-transform duration-500 hover:-translate-y-2 hover:rotate-0">
+            <img src={maracujaImg} alt="Nova embalagem Coco Cuesta sabor Maracujá" className="aspect-[0.43] w-full object-contain [filter:drop-shadow(0_30px_28px_rgba(0,0,0,.48))]" />
           </figure>
-          <figure className="relative z-10 -translate-y-6 overflow-hidden rounded-[1.5rem] bg-white p-2 shadow-2xl shadow-black/50 transition-transform duration-500 hover:-translate-y-9 sm:-translate-y-10 sm:rounded-[2rem] sm:p-3">
+          <figure className="relative z-10 -translate-y-6 transition-transform duration-500 hover:-translate-y-9 sm:-translate-y-10">
             <span className="absolute left-1/2 top-4 z-20 -translate-x-1/2 whitespace-nowrap rounded-full bg-cuesta-300 px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider text-ink-950 sm:top-6 sm:text-xs">Nova embalagem</span>
-            <img src={cocoImg} alt="Nova embalagem Coco Cuesta sabor Água de Coco" className="aspect-[0.47] w-full rounded-[1.1rem] object-cover sm:rounded-[1.5rem]" />
+            <img src={cocoImg} alt="Nova embalagem Coco Cuesta sabor Água de Coco" className="aspect-[0.43] w-full object-contain [filter:drop-shadow(0_30px_28px_rgba(0,0,0,.48))]" />
           </figure>
-          <figure className="rotate-3 overflow-hidden rounded-[1.5rem] bg-white p-2 shadow-2xl shadow-black/50 transition-transform duration-500 hover:-translate-y-2 hover:rotate-0 sm:rounded-[2rem] sm:p-3">
-            <img src={melanciaImg} alt="Nova embalagem Coco Cuesta sabor Melancia" className="aspect-[0.47] w-full rounded-[1.1rem] object-cover sm:rounded-[1.5rem]" />
+          <figure className="rotate-3 transition-transform duration-500 hover:-translate-y-2 hover:rotate-0">
+            <img src={melanciaImg} alt="Nova embalagem Coco Cuesta sabor Melancia" className="aspect-[0.43] w-full object-contain [filter:drop-shadow(0_30px_28px_rgba(0,0,0,.48))]" />
           </figure>
         </div>
       </div>

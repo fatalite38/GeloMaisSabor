@@ -28,8 +28,8 @@ textarea {
 }
 
 ::selection {
-  color: #070a08;
-  background: #adf34f;
+  color: #000000;
+  background: #0094f6;
 }
 
 @layer components {

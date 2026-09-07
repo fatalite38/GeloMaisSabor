@@ -9,12 +9,12 @@ interface FlavorCardProps {
 
 const FlavorCard: React.FC<FlavorCardProps> = ({ flavor, featured = false }) => (
   <article className={`group relative overflow-hidden border border-black/10 bg-white transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/10 ${featured ? 'rounded-[2rem]' : 'rounded-3xl'}`}>
-    <div className={`relative overflow-hidden ${featured ? 'h-[31rem] bg-[#f4f4f0] sm:h-[36rem]' : 'h-56'}`}>
+    <div className={`relative overflow-hidden ${featured ? 'h-[31rem] bg-gradient-to-b from-cuesta-50 to-white sm:h-[36rem]' : 'h-56'}`}>
       <img
         src={flavor.image}
         alt={flavor.imageAlt}
         loading="lazy"
-        className={`h-full w-full transition-transform duration-700 group-hover:scale-[1.035] ${featured ? 'object-contain p-6' : 'object-cover'}`}
+        className={`h-full w-full transition-transform duration-700 group-hover:scale-[1.035] ${featured ? 'object-contain p-5 [filter:drop-shadow(0_20px_18px_rgba(0,0,0,.18))] sm:p-7' : 'object-cover'}`}
       />
       <span className={`absolute left-5 top-5 rounded-full px-3 py-1.5 text-xs font-extrabold uppercase tracking-wider ${flavor.newPackaging ? 'bg-ink-950 text-white' : 'border border-black/10 bg-white/90 text-ink-900 backdrop-blur'}`}>
         {flavor.newPackaging ? 'Nova embalagem' : 'Em transição'}

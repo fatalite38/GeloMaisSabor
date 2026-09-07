@@ -24,7 +24,7 @@ const AboutSection: React.FC = () => (
       </div>
 
       <div className="relative rounded-[2.25rem] bg-ink-950 p-8 text-white shadow-2xl shadow-cuesta-700/25 sm:p-12">
-        <div className="absolute right-8 top-8 h-3 w-3 rounded-full bg-cuesta-300 shadow-[0_0_28px_8px_rgba(173,243,79,.4)]" aria-hidden="true" />
+        <div className="absolute right-8 top-8 h-3 w-3 rounded-full bg-cuesta-300 shadow-[0_0_28px_8px_rgba(0,148,246,.4)]" aria-hidden="true" />
         <img src={logoImg} alt="Coco Cuesta" className="mx-auto w-full max-w-md" />
         <div className="mt-10 grid gap-4 border-t border-white/10 pt-7 sm:grid-cols-2">
           <div>
