@@ -34,17 +34,17 @@ const Footer: React.FC = () => {
             <p className="mt-6 max-w-xl text-lg leading-8 text-white/60">Fale com nossa equipe para conhecer os sabores, consultar disponibilidade e encontrar a melhor forma de atendimento.</p>
 
             <div className="mt-10 space-y-5 text-white/75">
-              <a href="https://maps.google.com/?q=R.%20Mirabeau%20Camargo%20Pach%C3%AAco%2C%201065%2C%20Botucatu%20SP" target="_blank" rel="noopener noreferrer" className="focus-ring flex items-start gap-3 rounded-lg transition-colors hover:text-white">
+              <a href="https://maps.google.com/?q=Botucatu%20SP" target="_blank" rel="noopener noreferrer" className="focus-ring flex items-center gap-3 rounded-lg transition-colors hover:text-white">
                 <MapPin className="mt-0.5 flex-none text-cuesta-300" size={21} aria-hidden="true" />
-                <span>R. Mirabeau Camargo Pachêco, 1065<br />Botucatu — SP, 18601-420</span>
+                <span>Botucatu — SP</span>
               </a>
               <a href="tel:+5514997445680" className="focus-ring flex items-center gap-3 rounded-lg transition-colors hover:text-white">
                 <Phone className="flex-none text-cuesta-300" size={21} aria-hidden="true" />
                 <span>(14) 99744-5680</span>
               </a>
-              <a href="mailto:gelomaissabor@hotmail.com" className="focus-ring flex items-center gap-3 rounded-lg transition-colors hover:text-white">
+              <a href="mailto:gelocococuesta@gmail.com" className="focus-ring flex items-center gap-3 rounded-lg transition-colors hover:text-white">
                 <Mail className="flex-none text-cuesta-300" size={21} aria-hidden="true" />
-                <span>gelomaissabor@hotmail.com</span>
+                <span>gelocococuesta@gmail.com</span>
               </a>
             </div>
 

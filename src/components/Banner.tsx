@@ -52,8 +52,7 @@ const Banner: React.FC = () => (
             <img src={maracujaImg} alt="Embalagem oficial Coco Cuesta sabor Maracujá" className="aspect-[0.461] w-full object-contain [filter:drop-shadow(0_30px_28px_rgba(0,0,0,.48))]" />
           </figure>
           <figure className="relative z-10 -translate-y-5 transition-transform duration-500 hover:-translate-y-8 sm:-translate-y-8">
-            <span className="absolute left-1/2 top-3 z-20 -translate-x-1/2 whitespace-nowrap rounded-full bg-cuesta-300 px-2 py-1 text-[8px] font-extrabold uppercase tracking-wider text-ink-950 sm:top-5 sm:px-3 sm:text-xs">5 novas embalagens</span>
-            <img src={cocoImg} alt="Embalagem oficial Coco Cuesta sabor Água de Coco" className="aspect-[0.461] w-full object-contain [filter:drop-shadow(0_30px_28px_rgba(0,0,0,.48))]" />
+            <img src={cocoImg} alt="Embalagem oficial Coco Cuesta sabor Água de Coco" className="aspect-[0.461] w-full object-contain [filter:drop-shadow(0_30px_28px_rgba(0,0,0,.48))] motion-safe:animate-[float_4s_ease-in-out_infinite]" />
           </figure>
           <figure className="translate-y-2 transition-transform duration-500 hover:-translate-y-1 sm:translate-y-3">
             <img src={melanciaImg} alt="Embalagem oficial Coco Cuesta sabor Melancia" className="aspect-[0.461] w-full object-contain [filter:drop-shadow(0_30px_28px_rgba(0,0,0,.48))]" />
