@@ -1,11 +1,11 @@
 import React from 'react';
 import FlavorCard from './FlavorCard';
-import cocoImg from '../assets/coco-cuesta/agua-de-coco.webp';
-import maracujaImg from '../assets/coco-cuesta/maracuja.webp';
-import melanciaImg from '../assets/coco-cuesta/melancia.webp';
+import cocoImg from '../assets/coco-cuesta/agua-de-coco-oficial.png';
+import macaVerdeImg from '../assets/coco-cuesta/maca-verde-oficial.png';
+import maracujaImg from '../assets/coco-cuesta/maracuja-oficial.png';
+import melanciaImg from '../assets/coco-cuesta/melancia-oficial.png';
+import morangoImg from '../assets/coco-cuesta/morango-oficial.png';
 import laranjaImg from '../assets/flavors/laranja.jpg';
-import macaVerdeImg from '../assets/flavors/maca-verde.jpg';
-import morangoImg from '../assets/flavors/morango.jpg';
 import uvaImg from '../assets/flavors/uva.jpg';
 
 export interface Flavor {
@@ -42,25 +42,25 @@ const featuredFlavors: Flavor[] = [
     description: 'Leve e refrescante, com uma apresentação que chama atenção em qualquer ocasião.',
     newPackaging: true,
   },
-];
-
-const transitionFlavors: Flavor[] = [
   {
     id: 4,
     name: 'Morango',
     image: morangoImg,
-    imageAlt: 'Apresentação do sabor Morango',
+    imageAlt: 'Embalagem Coco Cuesta sabor Morango, com fundo vermelho',
     description: 'Um sabor doce e aromático para combinações cheias de personalidade.',
-    newPackaging: false,
+    newPackaging: true,
   },
   {
     id: 5,
     name: 'Maçã Verde',
     image: macaVerdeImg,
-    imageAlt: 'Apresentação do sabor Maçã Verde',
+    imageAlt: 'Embalagem Coco Cuesta sabor Maçã Verde, com fundo verde',
     description: 'Refrescância e um toque levemente ácido para equilibrar sua bebida.',
-    newPackaging: false,
+    newPackaging: true,
   },
+];
+
+const transitionFlavors: Flavor[] = [
   {
     id: 6,
     name: 'Laranja',
@@ -90,11 +90,11 @@ const FlavorsSection: React.FC = () => (
           </h2>
         </div>
         <p className="max-w-2xl text-lg leading-8 text-black/60 lg:justify-self-end">
-          Os primeiros sabores já apresentam a nova identidade Coco Cuesta. Os demais continuam disponíveis com a embalagem Mais Sabor enquanto os estoques são renovados.
+          Cinco sabores já apresentam a nova identidade Coco Cuesta. Laranja e Uva continuam disponíveis com a embalagem Mais Sabor enquanto os estoques são renovados.
         </p>
       </div>
 
-      <div className="mt-14 grid gap-6 md:grid-cols-3">
+      <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
         {featuredFlavors.map((flavor) => <FlavorCard key={flavor.id} flavor={flavor} featured />)}
       </div>
 
@@ -106,7 +106,7 @@ const FlavorsSection: React.FC = () => (
         <p className="max-w-lg text-sm leading-6 text-black/50">A identidade visual muda aos poucos. O cuidado e a experiência que você já conhece continuam os mesmos.</p>
       </div>
 
-      <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-8 grid max-w-3xl gap-5 sm:grid-cols-2">
         {transitionFlavors.map((flavor) => <FlavorCard key={flavor.id} flavor={flavor} />)}
       </div>
     </div>

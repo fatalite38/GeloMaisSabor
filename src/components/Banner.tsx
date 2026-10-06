@@ -1,8 +1,10 @@
 import React from 'react';
 import { ArrowRight, MapPin } from 'lucide-react';
-import cocoImg from '../assets/coco-cuesta/agua-de-coco.webp';
-import maracujaImg from '../assets/coco-cuesta/maracuja.webp';
-import melanciaImg from '../assets/coco-cuesta/melancia.webp';
+import cocoImg from '../assets/coco-cuesta/agua-de-coco-oficial.png';
+import macaVerdeImg from '../assets/coco-cuesta/maca-verde-oficial.png';
+import maracujaImg from '../assets/coco-cuesta/maracuja-oficial.png';
+import melanciaImg from '../assets/coco-cuesta/melancia-oficial.png';
+import morangoImg from '../assets/coco-cuesta/morango-oficial.png';
 
 const Banner: React.FC = () => (
   <section id="home" className="relative min-h-[820px] overflow-hidden bg-ink-950 pb-20 pt-40 text-white sm:pt-44 lg:flex lg:min-h-screen lg:items-center lg:py-44">
@@ -42,16 +44,22 @@ const Banner: React.FC = () => (
 
       <div className="relative mx-auto w-full max-w-3xl pt-8 lg:pt-0">
         <div className="absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cuesta-300/20 blur-3xl" aria-hidden="true" />
-        <div className="relative grid grid-cols-3 items-end gap-2 sm:gap-5">
-          <figure className="-rotate-3 transition-transform duration-500 hover:-translate-y-2 hover:rotate-0">
-            <img src={maracujaImg} alt="Nova embalagem Coco Cuesta sabor Maracujá" className="aspect-[0.43] w-full object-contain [filter:drop-shadow(0_30px_28px_rgba(0,0,0,.48))]" />
+        <div className="relative grid grid-cols-5 items-end gap-1 sm:gap-3">
+          <figure className="translate-y-5 transition-transform duration-500 hover:-translate-y-1 sm:translate-y-8">
+            <img src={morangoImg} alt="Embalagem oficial Coco Cuesta sabor Morango" className="aspect-[0.461] w-full object-contain [filter:drop-shadow(0_30px_28px_rgba(0,0,0,.48))]" />
           </figure>
-          <figure className="relative z-10 -translate-y-6 transition-transform duration-500 hover:-translate-y-9 sm:-translate-y-10">
-            <span className="absolute left-1/2 top-4 z-20 -translate-x-1/2 whitespace-nowrap rounded-full bg-cuesta-300 px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider text-ink-950 sm:top-6 sm:text-xs">Nova embalagem</span>
-            <img src={cocoImg} alt="Nova embalagem Coco Cuesta sabor Água de Coco" className="aspect-[0.43] w-full object-contain [filter:drop-shadow(0_30px_28px_rgba(0,0,0,.48))]" />
+          <figure className="translate-y-2 transition-transform duration-500 hover:-translate-y-1 sm:translate-y-3">
+            <img src={maracujaImg} alt="Embalagem oficial Coco Cuesta sabor Maracujá" className="aspect-[0.461] w-full object-contain [filter:drop-shadow(0_30px_28px_rgba(0,0,0,.48))]" />
           </figure>
-          <figure className="rotate-3 transition-transform duration-500 hover:-translate-y-2 hover:rotate-0">
-            <img src={melanciaImg} alt="Nova embalagem Coco Cuesta sabor Melancia" className="aspect-[0.43] w-full object-contain [filter:drop-shadow(0_30px_28px_rgba(0,0,0,.48))]" />
+          <figure className="relative z-10 -translate-y-5 transition-transform duration-500 hover:-translate-y-8 sm:-translate-y-8">
+            <span className="absolute left-1/2 top-3 z-20 -translate-x-1/2 whitespace-nowrap rounded-full bg-cuesta-300 px-2 py-1 text-[8px] font-extrabold uppercase tracking-wider text-ink-950 sm:top-5 sm:px-3 sm:text-xs">5 novas embalagens</span>
+            <img src={cocoImg} alt="Embalagem oficial Coco Cuesta sabor Água de Coco" className="aspect-[0.461] w-full object-contain [filter:drop-shadow(0_30px_28px_rgba(0,0,0,.48))]" />
+          </figure>
+          <figure className="translate-y-2 transition-transform duration-500 hover:-translate-y-1 sm:translate-y-3">
+            <img src={melanciaImg} alt="Embalagem oficial Coco Cuesta sabor Melancia" className="aspect-[0.461] w-full object-contain [filter:drop-shadow(0_30px_28px_rgba(0,0,0,.48))]" />
+          </figure>
+          <figure className="translate-y-5 transition-transform duration-500 hover:-translate-y-1 sm:translate-y-8">
+            <img src={macaVerdeImg} alt="Embalagem oficial Coco Cuesta sabor Maçã Verde" className="aspect-[0.461] w-full object-contain [filter:drop-shadow(0_30px_28px_rgba(0,0,0,.48))]" />
           </figure>
         </div>
       </div>

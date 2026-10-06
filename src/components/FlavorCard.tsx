@@ -9,7 +9,7 @@ interface FlavorCardProps {
 
 const FlavorCard: React.FC<FlavorCardProps> = ({ flavor, featured = false }) => (
   <article className={`group relative overflow-hidden border border-black/10 bg-white transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/10 ${featured ? 'rounded-[2rem]' : 'rounded-3xl'}`}>
-    <div className={`relative overflow-hidden ${featured ? 'h-[31rem] bg-gradient-to-b from-cuesta-50 to-white sm:h-[36rem]' : 'h-56'}`}>
+    <div className={`relative overflow-hidden ${featured ? 'h-[29rem] bg-gradient-to-b from-cuesta-50 to-white sm:h-[32rem] xl:h-[30rem]' : 'h-56'}`}>
       <img
         src={flavor.image}
         alt={flavor.imageAlt}
