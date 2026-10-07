@@ -15,9 +15,11 @@ const BrandCampaignSection: React.FC = () => (
         <img
           src={campaignImg}
           alt="Arte Coco Cuesta com as embalagens de Melancia, Água de Coco, Maracujá, Maçã Verde e Morango, além dos contatos da marca"
+          width={1774}
+          height={887}
           loading="lazy"
           decoding="async"
-          className="h-auto w-full"
+          className="block h-auto w-full object-contain"
         />
       </figure>
     </div>
