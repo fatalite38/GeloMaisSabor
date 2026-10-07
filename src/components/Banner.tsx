@@ -45,20 +45,20 @@ const Banner: React.FC = () => (
       <div className="relative mx-auto w-full max-w-3xl pt-8 lg:pt-0">
         <div className="absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cuesta-300/20 blur-3xl" aria-hidden="true" />
         <div className="relative grid grid-cols-5 items-end gap-1 sm:gap-3">
-          <figure className="translate-y-5 transition-transform duration-500 hover:-translate-y-1 sm:translate-y-8">
-            <img src={morangoImg} alt="Embalagem oficial Coco Cuesta sabor Morango" className="aspect-[0.461] w-full object-contain [filter:drop-shadow(0_30px_28px_rgba(0,0,0,.48))]" />
+          <figure className="translate-y-5 group sm:translate-y-8">
+            <img src={morangoImg} alt="Embalagem oficial Coco Cuesta sabor Morango" className="aspect-[0.461] w-full object-contain transition-transform duration-500 group-hover:-translate-y-1 [filter:drop-shadow(0_30px_28px_rgba(0,0,0,.48))]" />
           </figure>
-          <figure className="translate-y-2 transition-transform duration-500 hover:-translate-y-1 sm:translate-y-3">
-            <img src={maracujaImg} alt="Embalagem oficial Coco Cuesta sabor Maracujá" className="aspect-[0.461] w-full object-contain [filter:drop-shadow(0_30px_28px_rgba(0,0,0,.48))]" />
+          <figure className="translate-y-2 group sm:translate-y-3">
+            <img src={maracujaImg} alt="Embalagem oficial Coco Cuesta sabor Maracujá" className="aspect-[0.461] w-full object-contain transition-transform duration-500 group-hover:-translate-y-1 [filter:drop-shadow(0_30px_28px_rgba(0,0,0,.48))]" />
           </figure>
-          <figure className="relative z-10 -translate-y-5 transition-transform duration-500 hover:-translate-y-1 sm:-translate-y-8">
-            <img src={cocoImg} alt="Embalagem oficial Coco Cuesta sabor Água de Coco" className="aspect-[0.461] w-full object-contain [filter:drop-shadow(0_30px_28px_rgba(0,0,0,.48))]" />
+          <figure className="relative z-10 -translate-y-5 group sm:-translate-y-8">
+            <img src={cocoImg} alt="Embalagem oficial Coco Cuesta sabor Água de Coco" className="aspect-[0.461] w-full object-contain transition-transform duration-500 group-hover:-translate-y-1 [filter:drop-shadow(0_30px_28px_rgba(0,0,0,.48))]" />
           </figure>
-          <figure className="translate-y-2 transition-transform duration-500 hover:-translate-y-1 sm:translate-y-3">
-            <img src={melanciaImg} alt="Embalagem oficial Coco Cuesta sabor Melancia" className="aspect-[0.461] w-full object-contain [filter:drop-shadow(0_30px_28px_rgba(0,0,0,.48))]" />
+          <figure className="translate-y-2 group sm:translate-y-3">
+            <img src={melanciaImg} alt="Embalagem oficial Coco Cuesta sabor Melancia" className="aspect-[0.461] w-full object-contain transition-transform duration-500 group-hover:-translate-y-1 [filter:drop-shadow(0_30px_28px_rgba(0,0,0,.48))]" />
           </figure>
-          <figure className="translate-y-5 transition-transform duration-500 hover:-translate-y-1 sm:translate-y-8">
-            <img src={macaVerdeImg} alt="Embalagem oficial Coco Cuesta sabor Maçã Verde" className="aspect-[0.461] w-full object-contain [filter:drop-shadow(0_30px_28px_rgba(0,0,0,.48))]" />
+          <figure className="translate-y-5 group sm:translate-y-8">
+            <img src={macaVerdeImg} alt="Embalagem oficial Coco Cuesta sabor Maçã Verde" className="aspect-[0.461] w-full object-contain transition-transform duration-500 group-hover:-translate-y-1 [filter:drop-shadow(0_30px_28px_rgba(0,0,0,.48))]" />
           </figure>
         </div>
       </div>
