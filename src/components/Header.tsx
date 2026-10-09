@@ -1,104 +1,90 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
-import logoImg from '../assets/logoImg.png';
+import React, { useEffect, useState } from 'react';
+import { Menu, MessageCircle, X } from 'lucide-react';
+import logoImg from '../assets/coco-cuesta/logo-coco-cuesta.webp';
+
+const navigation = [
+  { label: 'Início', href: '#home' },
+  { label: 'Sabores', href: '#produtos' },
+  { label: 'Nossa história', href: '#sobre' },
+  { label: 'Avaliações', href: '#depoimentos' },
+];
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // Verifica se o usuário está rolando a página
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
+    const handleScroll = () => setIsScrolled(window.scrollY > 24);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  return (
-    <header
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'
-      }`}
-    >
-      <div className="container mx-auto px-4 flex justify-between items-center">
-        <div className="flex items-center">
-          <img 
-            src={logoImg}
-            alt="Cubos de gelo coloridos"
-            className="w-12 h-12 rounded-full"
-            //tamanho
-            style={{ width: '140px', height: '100px'  }}
-          />
-          <span 
-            className={`ml-2 font-nunito font-bold text-2xl transition-colors duration-300 ${
-              isScrolled ? 'text-primary-600' : 'text-white'
-            }`}
-          >
-          </span>
-        </div>
+  useEffect(() => {
+    document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMenuOpen]);
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex">
-          <ul className="flex space-x-8">
-            {['Home', 'Produtos', 'Sobre', 'Depoimentos', 'Contato'].map((item) => (
-              <li key={item}>
-                <a
-                  href={`#${item.toLowerCase()}`}
-                  className={`font-nunito font-bold hover:text-primary-300 transition-colors duration-300 ${
-                    isScrolled ? 'text-gray-700' : 'text-white'
-                  }`}
-                >
-                  {item}
-                </a>
-              </li>
-            ))}
-          </ul>
+  return (
+    <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-ink-950/95 shadow-xl shadow-black/10 backdrop-blur-xl' : 'bg-transparent'}`}>
+      <div className="border-b border-white/10 bg-cuesta-300 px-4 py-2 text-center text-xs font-bold uppercase tracking-[0.14em] text-ink-950 sm:text-sm">
+        A Mais Sabor agora é Coco Cuesta
+      </div>
+
+      <div className="site-container flex h-20 items-center justify-between">
+        <a href="#home" className="focus-ring rounded-lg" aria-label="Coco Cuesta — início">
+          <img src={logoImg} alt="Coco Cuesta" className="h-14 w-auto object-contain" />
+        </a>
+
+        <nav className="hidden items-center gap-8 lg:flex" aria-label="Navegação principal">
+          {navigation.map((item) => (
+            <a key={item.href} href={item.href} className="focus-ring rounded-md text-sm font-semibold text-white/75 transition-colors hover:text-white">
+              {item.label}
+            </a>
+          ))}
         </nav>
 
-        {/* Mobile Menu Button */}
-        <button
-          className="md:hidden z-50"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          aria-label="Toggle menu"
+        <a
+          href="https://api.whatsapp.com/send?phone=5514997445680&text=Ol%C3%A1%2C%20gostaria%20de%20conhecer%20os%20produtos%20Coco%20Cuesta."
+          target="_blank"
+          rel="noopener noreferrer"
+          className="focus-ring hidden items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-bold text-ink-950 transition-transform hover:-translate-y-0.5 lg:inline-flex"
         >
-          {isMenuOpen ? (
-            <X size={30} className="text-white" />
-          ) : (
-            <Menu
-              size={30} 
-              className={`${isScrolled ? 'text-gray-700' : 'text-white'}`} 
-            />
-          )}
-        </button>
+          <MessageCircle size={18} aria-hidden="true" />
+          Fale conosco
+        </a>
 
-        {/* Mobile Navigation */}
-        <div
-          className={`fixed inset-0 bg-gray-800 bg-opacity-95 flex flex-col items-center justify-center text-gray-700 z-40 transform transition-transform duration-300 ease-in-out ${
-            isMenuOpen ? 'translate-x-0' : 'translate-x-full'
-          } md:hidden`}
+        <button
+          type="button"
+          className="focus-ring rounded-xl border border-white/15 p-3 text-white lg:hidden"
+          onClick={() => setIsMenuOpen((open) => !open)}
+          aria-expanded={isMenuOpen}
+          aria-controls="mobile-menu"
+          aria-label={isMenuOpen ? 'Fechar menu' : 'Abrir menu'}
         >
-          <div className="flex flex-col items-center justify-center h-full">
-            <ul className="text-center space-y-10">
-              {['Home', 'Produtos', 'Sobre', 'Depoimentos', 'Contato'].map((item) => (
-                <li key={item}>
-                  <a
-                    href={`#${item.toLowerCase()}`}
-                    className="font-nunito text-2xl font-bold text-gray-200 hover:text-primary-500 transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+          {isMenuOpen ? <X size={25} /> : <Menu size={25} />}
+        </button>
+      </div>
+
+      <div id="mobile-menu" className={`absolute inset-x-0 top-full border-t border-white/10 bg-ink-950 px-5 transition-all duration-300 lg:hidden ${isMenuOpen ? 'visible opacity-100' : 'invisible -translate-y-3 opacity-0'}`}>
+        <nav className="mx-auto flex max-w-7xl flex-col py-6" aria-label="Navegação móvel">
+          {navigation.map((item) => (
+            <a key={item.href} href={item.href} onClick={() => setIsMenuOpen(false)} className="focus-ring rounded-lg border-b border-white/10 py-4 text-lg font-semibold text-white">
+              {item.label}
+            </a>
+          ))}
+          <a
+            href="https://api.whatsapp.com/send?phone=5514997445680&text=Ol%C3%A1%2C%20gostaria%20de%20conhecer%20os%20produtos%20Coco%20Cuesta."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="focus-ring mt-6 flex items-center justify-center gap-2 rounded-full bg-cuesta-300 px-5 py-4 font-bold text-ink-950"
+          >
+            <MessageCircle size={19} aria-hidden="true" />
+            Fale conosco
+          </a>
+        </nav>
       </div>
     </header>
   );

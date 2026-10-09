@@ -1,15 +1,16 @@
-# ❄️ Gelo Mais Sabor
+# 🥥 Coco Cuesta
 
-Site institucional responsivo para a empresa **Gelo Mais Sabor**, especializada na produção e venda de gelo saborizado. O projeto visa apresentar os produtos, contar a história da empresa, compartilhar depoimentos de clientes e facilitar o contato por e-mail.
+Site institucional responsivo da **Coco Cuesta**, nova identidade da Mais Sabor. O projeto apresenta as misturas congeladas para saborizar bebidas, comunica a transição da marca, conta sua história e facilita o contato comercial.
 
 
 ## 📌 Funcionalidades
 
-- **Página Home:** Apresentação da empresa com imagem de destaque.
-- **Página Produtos:** Amostra dos principais sabores de gelo.
-- **Página Sobre:** História e missão da Gelo Mais Sabor.
-- **Página Depoimentos:** Comentários de clientes satisfeitos.
-- **Página Contato:** Formulário de e-mail funcional com integração ao EmailJS.
+- **Início:** Apresentação da Coco Cuesta e das novas embalagens.
+- **Sabores:** Portfólio dividido entre nova identidade e embalagens em transição.
+- **Experiência:** Orientação simples sobre a proposta do produto.
+- **Nossa história:** Contexto da mudança de Mais Sabor para Coco Cuesta.
+- **Avaliações:** Depoimentos de clientes e acesso ao Google.
+- **Contato:** WhatsApp, dados comerciais e formulário integrado ao EmailJS.
 
 
 ## 🛠️ Tecnologias Utilizadas
