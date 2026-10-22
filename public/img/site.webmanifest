@@ -1,6 +1,11 @@
 {
   "name": "Coco Cuesta",
   "short_name": "Coco Cuesta",
+  "description": "Gelo saborizado Coco Cuesta em Botucatu, SP.",
+  "lang": "pt-BR",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
   "icons": [
     {
       "src": "/img/web-app-manifest-192x192.png",
