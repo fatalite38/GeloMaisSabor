@@ -85,7 +85,7 @@ const Footer: React.FC = () => {
     sendingRef.current = true;
     setStatus('loading');
     try {
-      await emailjs.sendForm('service_3ea3dpt', 'template_nb4tujg', form, 'dbTIX8HhSJ8iTOdL7');
+      await emailjs.sendForm('service_nj6znvq', 'template_80se6qx', form, 'rgB6ULLD6ZTXk_Oyo');
       form.reset();
       setStatus('success');
     } catch {
