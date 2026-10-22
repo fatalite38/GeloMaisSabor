@@ -1,69 +1,22 @@
-import React from 'react';
-import { ArrowRight, MapPin } from 'lucide-react';
-import cocoImg from '../assets/coco-cuesta/agua-de-coco-oficial.png';
-import macaVerdeImg from '../assets/coco-cuesta/maca-verde-oficial.png';
-import maracujaImg from '../assets/coco-cuesta/maracuja-oficial.png';
-import melanciaImg from '../assets/coco-cuesta/melancia-oficial.png';
-import morangoImg from '../assets/coco-cuesta/morango-oficial.png';
+import panorama from '../assets/coco-cuesta/aprovados/banner-aqua-1774.webp';
+import panoramaMedium from '../assets/coco-cuesta/aprovados/banner-aqua-1280.webp';
+import panoramaSmall from '../assets/coco-cuesta/aprovados/banner-aqua-768.webp';
+import portrait from '../assets/coco-cuesta/aprovados/banner-aqua-mobile-704.webp';
+import portraitSmall from '../assets/coco-cuesta/aprovados/banner-aqua-mobile-390.webp';
+import './CampaignHero.css';
 
-const Banner: React.FC = () => (
-  <section id="home" className="relative min-h-[820px] overflow-hidden bg-ink-950 pb-20 pt-40 text-white sm:pt-44 lg:flex lg:min-h-screen lg:items-center lg:py-44">
-    <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-      <div className="absolute -right-32 top-24 h-[520px] w-[520px] rounded-full bg-cuesta-500/20 blur-[120px]" />
-      <div className="absolute -bottom-48 -left-28 h-[480px] w-[480px] rounded-full bg-blue-500/10 blur-[110px]" />
-      <div className="absolute inset-0 opacity-[0.045] [background-image:linear-gradient(rgba(255,255,255,.8)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.8)_1px,transparent_1px)] [background-size:72px_72px]" />
-    </div>
-
-    <div className="site-container relative grid items-center gap-16 lg:grid-cols-[0.9fr_1.1fr]">
-      <div className="max-w-2xl">
-        <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white/80 backdrop-blur-sm">
-          <MapPin size={16} className="text-cuesta-300" aria-hidden="true" />
-          Nascida em Botucatu, feita para refrescar
-        </div>
-        <h1 className="text-5xl font-black leading-[0.98] tracking-[-0.045em] sm:text-6xl xl:text-7xl">
-          Sabor que transforma cada gole.
-        </h1>
-        <p className="mt-7 max-w-xl text-lg leading-8 text-white/70 sm:text-xl">
-          Misturas congeladas para saborizar bebidas, com praticidade, identidade e uma nova marca inspirada na nossa região.
-        </p>
-
-        <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-          <a href="#produtos" className="focus-ring inline-flex items-center justify-center gap-2 rounded-full bg-cuesta-300 px-7 py-4 font-bold text-ink-950 transition-all hover:-translate-y-0.5 hover:bg-cuesta-100">
-            Conheça os sabores
-            <ArrowRight size={19} aria-hidden="true" />
-          </a>
-          <a href="#sobre" className="focus-ring inline-flex items-center justify-center rounded-full border border-white/20 px-7 py-4 font-semibold text-white transition-colors hover:bg-white/10">
-            Conheça a nova marca
-          </a>
-        </div>
-
-        <div className="mt-10 flex items-center gap-4 border-l-2 border-cuesta-300 pl-4 text-sm leading-6 text-white/60">
-          <span><strong className="block font-bold text-white">Mais Sabor agora é Coco Cuesta</strong>Durante a transição, você encontrará embalagens das duas marcas.</span>
-        </div>
+export default function Banner() {
+  return (
+    <section id="home" className="aqua-hero" aria-labelledby="hero-title">
+      <div className="aqua-hero-copy">
+        <h1 id="hero-title">Sabor que refresca.</h1>
+        <p>Gelo saborizado Coco Cuesta.</p>
+        <a className="button button-dark" href="#produtos">Conhecer os sabores</a>
       </div>
-
-      <div className="relative mx-auto w-full max-w-3xl pt-8 lg:pt-0">
-        <div className="absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cuesta-300/20 blur-3xl" aria-hidden="true" />
-        <div className="relative grid grid-cols-5 items-end gap-1 sm:gap-3">
-          <figure className="translate-y-5 group sm:translate-y-8">
-            <img src={morangoImg} alt="Embalagem oficial Coco Cuesta sabor Morango" className="aspect-[0.461] w-full object-contain transition-transform duration-500 group-hover:-translate-y-1 [filter:drop-shadow(0_30px_28px_rgba(0,0,0,.48))]" />
-          </figure>
-          <figure className="translate-y-2 group sm:translate-y-3">
-            <img src={maracujaImg} alt="Embalagem oficial Coco Cuesta sabor Maracujá" className="aspect-[0.461] w-full object-contain transition-transform duration-500 group-hover:-translate-y-1 [filter:drop-shadow(0_30px_28px_rgba(0,0,0,.48))]" />
-          </figure>
-          <figure className="relative z-10 -translate-y-5 group sm:-translate-y-8">
-            <img src={cocoImg} alt="Embalagem oficial Coco Cuesta sabor Água de Coco" className="aspect-[0.461] w-full object-contain transition-transform duration-500 group-hover:-translate-y-1 [filter:drop-shadow(0_30px_28px_rgba(0,0,0,.48))]" />
-          </figure>
-          <figure className="translate-y-2 group sm:translate-y-3">
-            <img src={melanciaImg} alt="Embalagem oficial Coco Cuesta sabor Melancia" className="aspect-[0.461] w-full object-contain transition-transform duration-500 group-hover:-translate-y-1 [filter:drop-shadow(0_30px_28px_rgba(0,0,0,.48))]" />
-          </figure>
-          <figure className="translate-y-5 group sm:translate-y-8">
-            <img src={macaVerdeImg} alt="Embalagem oficial Coco Cuesta sabor Maçã Verde" className="aspect-[0.461] w-full object-contain transition-transform duration-500 group-hover:-translate-y-1 [filter:drop-shadow(0_30px_28px_rgba(0,0,0,.48))]" />
-          </figure>
-        </div>
-      </div>
-    </div>
-  </section>
-);
-
-export default Banner;
+      <picture className="aqua-hero-art">
+        <source media="(max-width: 600px)" srcSet={`${portraitSmall} 390w, ${portrait} 704w`} sizes="100vw" width={704} height={880} />
+        <img src={panorama} srcSet={`${panoramaSmall} 768w, ${panoramaMedium} 1280w, ${panorama} 1774w`} sizes="100vw" alt="Sachês Coco Cuesta de Água de Coco, Maracujá e Melancia entre frutas, gotas de água e gelo sobre fundo aqua" width={1774} height={887} fetchPriority="high" />
+      </picture>
+    </section>
+  );
+}

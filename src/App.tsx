@@ -1,26 +1,28 @@
 import Header from './components/Header';
 import Banner from './components/Banner';
 import FlavorsSection from './components/FlavorsSection';
-import TestimonialsSection from './components/TestimonialsSection';
 import AboutSection from './components/AboutSection';
 import Footer from './components/Footer';
 import ExperienceSection from './components/ExperienceSection';
-import BrandCampaignSection from './components/BrandCampaignSection';
+import TestimonialsSection from './components/TestimonialsSection';
+import FloatingWhatsApp from './components/FloatingWhatsApp';
 
 function App() {
   return (
-    <div className="overflow-hidden bg-cream font-nunito text-ink-900">
+    <>
+      <a className="skip-link" href="#conteudo">Pular para o conteúdo</a>
       <Header />
-      <main>
+      <main id="conteudo" tabIndex={-1}>
         <Banner />
         <FlavorsSection />
         <ExperienceSection />
         <AboutSection />
-        <BrandCampaignSection />
         <TestimonialsSection />
+        {/* Galeria preservada nos componentes para retomar com fotos da fábrica. */}
       </main>
       <Footer />
-    </div>
+      <FloatingWhatsApp />
+    </>
   );
 }
 

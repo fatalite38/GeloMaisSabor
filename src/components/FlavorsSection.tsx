@@ -1,116 +1,72 @@
-import React from 'react';
-import FlavorCard from './FlavorCard';
-import cocoImg from '../assets/coco-cuesta/agua-de-coco-oficial.png';
-import macaVerdeImg from '../assets/coco-cuesta/maca-verde-oficial.png';
-import maracujaImg from '../assets/coco-cuesta/maracuja-oficial.png';
-import melanciaImg from '../assets/coco-cuesta/melancia-oficial.png';
-import morangoImg from '../assets/coco-cuesta/morango-oficial.png';
-import laranjaImg from '../assets/flavors/laranja.jpg';
-import uvaImg from '../assets/flavors/uva.jpg';
+import { useEffect, useState } from 'react';
+import { MessageCircle } from 'lucide-react';
+import { flavors } from '../data/flavors';
+import { whatsappUrl } from '../data/contact';
 
-export interface Flavor {
-  id: number;
-  name: string;
-  image: string;
-  imageAlt: string;
-  description: string;
-  newPackaging: boolean;
+function flavorFromUrl() {
+  const id = new URLSearchParams(window.location.search).get('sabor');
+  return flavors.find(flavor => flavor.id === id)?.id ?? flavors[0].id;
 }
 
-const featuredFlavors: Flavor[] = [
-  {
-    id: 1,
-    name: 'Água de Coco',
-    image: cocoImg,
-    imageAlt: 'Embalagem Coco Cuesta sabor Água de Coco, com fundo azul',
-    description: 'Tropical e refrescante, para combinações leves e momentos que pedem frescor.',
-    newPackaging: true,
-  },
-  {
-    id: 2,
-    name: 'Maracujá',
-    image: maracujaImg,
-    imageAlt: 'Embalagem Coco Cuesta sabor Maracujá, com fundo amarelo',
-    description: 'Marcante e cítrico, uma escolha vibrante para dar personalidade à bebida.',
-    newPackaging: true,
-  },
-  {
-    id: 3,
-    name: 'Melancia',
-    image: melanciaImg,
-    imageAlt: 'Embalagem Coco Cuesta sabor Melancia, com fundo preto',
-    description: 'Leve e refrescante, com uma apresentação que chama atenção em qualquer ocasião.',
-    newPackaging: true,
-  },
-  {
-    id: 4,
-    name: 'Morango',
-    image: morangoImg,
-    imageAlt: 'Embalagem Coco Cuesta sabor Morango, com fundo vermelho',
-    description: 'Um sabor doce e aromático para combinações cheias de personalidade.',
-    newPackaging: true,
-  },
-  {
-    id: 5,
-    name: 'Maçã Verde',
-    image: macaVerdeImg,
-    imageAlt: 'Embalagem Coco Cuesta sabor Maçã Verde, com fundo verde',
-    description: 'Refrescância e um toque levemente ácido para equilibrar sua bebida.',
-    newPackaging: true,
-  },
-];
+export default function FlavorsSection() {
+  const [selectedId, setSelectedId] = useState(flavorFromUrl);
+  const selected = flavors.find(flavor => flavor.id === selectedId) ?? flavors[0];
 
-const transitionFlavors: Flavor[] = [
-  {
-    id: 6,
-    name: 'Laranja',
-    image: laranjaImg,
-    imageAlt: 'Apresentação do sabor Laranja',
-    description: 'Cítrico e versátil para encontros, eventos e momentos de descontração.',
-    newPackaging: false,
-  },
-  {
-    id: 7,
-    name: 'Uva',
-    image: uvaImg,
-    imageAlt: 'Apresentação do sabor Uva',
-    description: 'Aroma envolvente e sabor marcante para uma experiência diferente.',
-    newPackaging: false,
-  },
-];
+  useEffect(() => {
+    const syncSelection = () => setSelectedId(flavorFromUrl());
+    window.addEventListener('popstate', syncSelection);
+    return () => window.removeEventListener('popstate', syncSelection);
+  }, []);
 
-const FlavorsSection: React.FC = () => (
-  <section id="produtos" className="bg-cream py-24 sm:py-28" aria-labelledby="sabores-title">
-    <div className="site-container">
-      <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-end">
-        <div>
-          <p className="section-kicker">Nosso portfólio</p>
-          <h2 id="sabores-title" className="text-4xl font-black leading-tight tracking-[-0.035em] text-ink-950 sm:text-5xl">
-            Um sabor para cada momento.
-          </h2>
+  const selectFlavor = (id: string) => {
+    if (id === selectedId) return;
+    const url = new URL(window.location.href);
+    url.searchParams.set('sabor', id);
+    window.history.pushState({}, '', url);
+    setSelectedId(id);
+  };
+
+  return (
+    <section id="produtos" className="tasting" aria-labelledby="sabores-title">
+      <div className="site-container">
+        <div className="tasting-heading">
+          <h2 id="sabores-title">Escolha seu sabor.</h2>
+          <p>Gelo saborizado em embalagens de 190 g.</p>
         </div>
-        <p className="max-w-2xl text-lg leading-8 text-black/60 lg:justify-self-end">
-          Cinco sabores já apresentam a nova identidade Coco Cuesta. Laranja e Uva continuam disponíveis com a embalagem Mais Sabor enquanto os estoques são renovados.
-        </p>
-      </div>
-
-      <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-        {featuredFlavors.map((flavor) => <FlavorCard key={flavor.id} flavor={flavor} featured />)}
-      </div>
-
-      <div className="mt-20 flex flex-col gap-5 border-t border-black/10 pt-10 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <p className="text-sm font-bold uppercase tracking-[0.16em] text-cuesta-700">Também disponíveis</p>
-          <h3 className="mt-2 text-2xl font-extrabold text-ink-950">Sabores em transição de embalagem</h3>
+        <div className="flavor-options" role="group" aria-label="Escolher sabor Coco Cuesta">
+          {flavors.map(flavor => (
+            <button key={flavor.id} type="button" className="flavor-option" aria-pressed={selectedId === flavor.id}
+              aria-controls="sabor-destaque" onClick={() => selectFlavor(flavor.id)}
+              style={{ '--flavor-accent': flavor.accent } as React.CSSProperties}>
+              <img src={flavor.image} alt="" width={339} height={735} loading="lazy" decoding="async" />
+              <span>{flavor.name}</span>
+              <span className="option-state" aria-hidden="true">{selectedId === flavor.id ? 'Selecionado' : ''}</span>
+            </button>
+          ))}
         </div>
-        <p className="max-w-lg text-sm leading-6 text-black/50">A identidade visual muda aos poucos. O cuidado e a experiência que você já conhece continuam os mesmos.</p>
       </div>
-
-      <div className="mt-8 grid max-w-3xl gap-5 sm:grid-cols-2">
-        {transitionFlavors.map((flavor) => <FlavorCard key={flavor.id} flavor={flavor} />)}
+      <div className="tasting-stage" style={{ backgroundColor: selected.color, '--flavor-accent': selected.accent } as React.CSSProperties}>
+        <article id="sabor-destaque" className="site-container tasting-layout" aria-labelledby="selected-flavor-title">
+          <figure className="tasting-pack">
+            <img src={selected.image} alt={`Embalagem oficial Coco Cuesta sabor ${selected.name}, 190 g`} width={339} height={735} loading="lazy" decoding="async" />
+          </figure>
+          <div className="tasting-detail">
+            <div className="tasting-title">
+              <h3 id="selected-flavor-title">{selected.name}</h3>
+              <p className="tasting-profile">{selected.description}</p>
+            </div>
+            <div className="serving-suggestion">
+              <h4>Combina com</h4>
+              <p className="serving-pair">{selected.serving}</p>
+              <a className="button button-secondary tasting-how" href="#ocasioes">Ver como servir</a>
+            </div>
+            <a className="button button-dark tasting-order" href={whatsappUrl(`Olá! Quero pedir Coco Cuesta de ${selected.name}. Podem informar a disponibilidade, as quantidades e as condições de entrega?`)} target="_blank" rel="noopener noreferrer">
+              <MessageCircle size={19} aria-hidden="true" /> Pedir {selected.name}
+            </a>
+          </div>
+        </article>
       </div>
-    </div>
-  </section>
-);
-
-export default FlavorsSection;
+      <p className="sr-only" role="status" aria-live="polite">Sabor selecionado: {selected.name}.</p>
+    </section>
+  );
+}

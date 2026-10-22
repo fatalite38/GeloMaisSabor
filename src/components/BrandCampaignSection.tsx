@@ -1,29 +1,16 @@
-import React from 'react';
 import campaignImg from '../assets/coco-cuesta/campanha-cinco-sabores.png';
 
-const BrandCampaignSection: React.FC = () => (
-  <section className="bg-cream py-24 sm:py-28" aria-labelledby="campanha-title">
-    <div className="site-container">
-      <div className="mb-10 max-w-3xl">
-        <p className="section-kicker">A nova linha</p>
-        <h2 id="campanha-title" className="text-4xl font-black leading-tight tracking-[-0.035em] text-ink-950 sm:text-5xl">
-          A identidade Coco Cuesta reunida em cinco sabores.
-        </h2>
-      </div>
-
-      <figure className="overflow-hidden rounded-[2rem] border border-black/10 bg-black shadow-2xl shadow-black/15">
-        <img
-          src={campaignImg}
-          alt="Arte Coco Cuesta com as embalagens de Melancia, Água de Coco, Maracujá, Maçã Verde e Morango, além dos contatos da marca"
-          width={1672}
-          height={941}
-          loading="lazy"
-          decoding="async"
-          className="block h-auto w-full object-contain"
-        />
-      </figure>
-    </div>
-  </section>
-);
-
-export default BrandCampaignSection;
+export default function BrandCampaignSection() {
+  return (
+    <figure className="campaign-art">
+      <img
+        src={campaignImg}
+        alt="Campanha Coco Cuesta: embalagens de Melancia, Água de Coco, Maracujá, Maçã Verde e Morango entre frutas, gelo e água."
+        width={1672}
+        height={941}
+        loading="lazy"
+        decoding="async"
+      />
+    </figure>
+  );
+}

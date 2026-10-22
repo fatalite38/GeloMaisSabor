@@ -1,58 +1,39 @@
-import React from 'react';
-import { GlassWater, PackageCheck, Sparkles } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { flavors } from '../data/flavors';
+import caco from '../assets/coco-cuesta/aprovados/caco-apresentando.webp';
+import cacoSmall from '../assets/coco-cuesta/aprovados/caco-apresentando-768.webp';
 
-const steps = [
-  {
-    icon: PackageCheck,
-    number: '01',
-    title: 'Escolha o sabor',
-    description: 'Encontre a combinação que combina com a sua bebida e com o momento.',
-  },
-  {
-    icon: GlassWater,
-    number: '02',
-    title: 'Adicione à bebida',
-    description: 'Uma forma prática de gelar e acrescentar sabor ao mesmo tempo.',
-  },
-  {
-    icon: Sparkles,
-    number: '03',
-    title: 'Transforme o momento',
-    description: 'Sirva com personalidade em encontros, festas, eventos ou no dia a dia.',
-  },
-];
+const suggestions = flavors.map(flavor=>({id:flavor.id,name:flavor.name,title:flavor.serving,text:flavor.preparation}));
+function recipeFromUrl(){return suggestions.find(s=>s.id===new URLSearchParams(window.location.search).get('receita'))?.id??suggestions[0].id;}
 
-const ExperienceSection: React.FC = () => (
-  <section className="bg-ink-950 py-24 text-white" aria-labelledby="experiencia-title">
-    <div className="site-container">
-      <div className="grid gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
-        <div>
-          <p className="section-kicker text-cuesta-300">Simples de servir</p>
-          <h2 id="experiencia-title" className="max-w-xl text-4xl font-black leading-tight sm:text-5xl">
-            Mais sabor, sem complicação.
-          </h2>
+export default function ExperienceSection() {
+  const [selectedId,setSelectedId]=useState(recipeFromUrl);
+  useEffect(()=>{const sync=()=>setSelectedId(recipeFromUrl());window.addEventListener('popstate',sync);return()=>window.removeEventListener('popstate',sync);},[]);
+  const choose=(id:string)=>{if(id===selectedId)return;const url=new URL(window.location.href);url.searchParams.set('receita',id);window.history.pushState({},'',url);setSelectedId(id);};
+  const selected=suggestions.find(s=>s.id===selectedId)??suggestions[0];
+  return (
+    <section id="ocasioes" className="serve-section section-space" aria-labelledby="serve-title">
+      <div className="site-container serve-layout">
+        <figure className="caco-figure">
+          <img src={caco} srcSet={`${cacoSmall} 768w, ${caco} 1024w`} sizes="(max-width: 700px) calc(100vw - 48px), 470px" alt="Caco de corpo inteiro, com a mão aberta apresentando as sugestões de combinação" width={1024} height={1536} loading="lazy" decoding="async" />
+        </figure>
+        <div className="serve-copy">
+          <div className="serve-heading">
+            <h2 id="serve-title">Como servir</h2>
+          </div>
+          <div className="recipe-options" role="group" aria-label="Sugestões de combinação do Caco">
+            {suggestions.map(s=><button key={s.id} type="button" aria-pressed={selectedId===s.id} aria-controls="caco-recipe" onClick={()=>choose(s.id)}>{s.name}</button>)}
+          </div>
+          <div id="caco-recipe" className="caco-recipe" aria-live="polite">
+            <h3>{selected.title}</h3><p>{selected.text}</p>
+          </div>
+          <ol className="serve-steps">
+            <li><strong>Escolha a bebida.</strong> Água com gás, limonada ou chá gelado são algumas possibilidades.</li>
+            <li><strong>Abra a embalagem.</strong> Retire a mistura congelada para colocar na bebida.</li>
+            <li><strong>Misture e sirva.</strong> Experimente a combinação e ajuste ao seu gosto.</li>
+          </ol>
         </div>
-        <p className="max-w-2xl text-lg leading-8 text-white/65 lg:justify-self-end">
-          Coco Cuesta foi feita para quem quer transformar uma bebida comum em uma experiência marcante, de um jeito prático e refrescante.
-        </p>
       </div>
-
-      <div className="mt-14 grid gap-px overflow-hidden rounded-[2rem] border border-white/10 bg-white/10 md:grid-cols-3">
-        {steps.map(({ icon: Icon, number, title, description }) => (
-          <article key={number} className="group bg-ink-900 p-8 transition-colors hover:bg-ink-800 sm:p-10">
-            <div className="flex items-center justify-between">
-              <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-cuesta-300 text-ink-950">
-                <Icon size={23} aria-hidden="true" />
-              </span>
-              <span className="text-sm font-bold tracking-[0.2em] text-white/30">{number}</span>
-            </div>
-            <h3 className="mt-8 text-xl font-bold">{title}</h3>
-            <p className="mt-3 leading-7 text-white/60">{description}</p>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-);
-
-export default ExperienceSection;
+    </section>
+  );
+}

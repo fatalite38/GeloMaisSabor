@@ -1,106 +1,231 @@
-import React, { useRef, useState } from 'react';
-import { Facebook, Instagram, Mail, MapPin, MessageCircle, Phone, Send } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Facebook, Instagram, Loader2, Mail, MapPin, MessageCircle, Phone, Send } from 'lucide-react';
 import emailjs from 'emailjs-com';
 import logoImg from '../assets/coco-cuesta/logo-coco-cuesta.webp';
+import { whatsappUrl } from '../data/contact';
+import './Contact.css';
 
 type FormStatus = 'idle' | 'loading' | 'success' | 'error';
+type FieldName = 'name' | 'email' | 'message';
+type FormErrors = Partial<Record<FieldName, string>>;
+type ContactControl = HTMLInputElement | HTMLTextAreaElement;
+
+const fieldOrder: FieldName[] = ['name', 'email', 'message'];
+
+function getFieldError(field: FieldName, control: ContactControl): string | undefined {
+  if (!control.value.trim()) {
+    return {
+      name: 'Informe seu nome.',
+      email: 'Informe um e-mail para receber a resposta.',
+      message: 'Conte como podemos ajudar.',
+    }[field];
+  }
+
+  if (field === 'email' && control.validity.typeMismatch) {
+    return 'Digite um e-mail válido, como nome@exemplo.com.';
+  }
+
+  return undefined;
+}
 
 const Footer: React.FC = () => {
   const formRef = useRef<HTMLFormElement>(null);
+  const sendingRef = useRef(false);
   const [status, setStatus] = useState<FormStatus>('idle');
+  const [errors, setErrors] = useState<FormErrors>({});
+
+  useEffect(() => {
+    const protectDraft = (event: BeforeUnloadEvent) => {
+      const form = formRef.current;
+      if (form && fieldOrder.some(field => (form.elements.namedItem(field) as ContactControl).value.trim())) {
+        event.preventDefault();
+        event.returnValue = '';
+      }
+    };
+    window.addEventListener('beforeunload', protectDraft);
+    return () => window.removeEventListener('beforeunload', protectDraft);
+  }, []);
+
+  const validateField = (field: FieldName, control: ContactControl) => {
+    setErrors((previous) => ({ ...previous, [field]: getFieldError(field, control) }));
+  };
+
+  const handleFieldChange = (field: FieldName, control: ContactControl) => {
+    if (errors[field]) validateField(field, control);
+    if (status === 'success' || status === 'error') setStatus('idle');
+  };
+
+  const handleFieldBlur = (field: FieldName, event: React.FocusEvent<ContactControl>) => {
+    // Submit validates all fields; don't move its hit target between pointerdown and click.
+    if (event.relatedTarget === formRef.current?.querySelector('button[type="submit"]')) return;
+    validateField(field, event.currentTarget);
+  };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!formRef.current || status === 'loading') return;
+    const form = formRef.current;
+    if (!form || sendingRef.current) return;
 
+    const nextErrors: FormErrors = {};
+    for (const field of fieldOrder) {
+      const control = form.elements.namedItem(field) as ContactControl;
+      const error = getFieldError(field, control);
+      if (error) nextErrors[field] = error;
+    }
+    setErrors(nextErrors);
+
+    const firstInvalidField = fieldOrder.find((field) => nextErrors[field]);
+    if (firstInvalidField) {
+      setStatus('idle');
+      const firstInvalidControl = form.elements.namedItem(firstInvalidField) as ContactControl;
+      requestAnimationFrame(() => firstInvalidControl.focus());
+      return;
+    }
+
+    sendingRef.current = true;
     setStatus('loading');
     try {
-      await emailjs.sendForm('service_3ea3dpt', 'template_nb4tujg', formRef.current, 'dbTIX8HhSJ8iTOdL7');
-      formRef.current.reset();
+      await emailjs.sendForm('service_3ea3dpt', 'template_nb4tujg', form, 'dbTIX8HhSJ8iTOdL7');
+      form.reset();
       setStatus('success');
-    } catch (error) {
-      console.error('Erro ao enviar mensagem:', error);
+    } catch {
       setStatus('error');
+    } finally {
+      sendingRef.current = false;
     }
   };
 
+  const hasErrors = fieldOrder.some((field) => errors[field]);
+
   return (
-    <footer id="contato" className="bg-ink-950 text-white">
-      <div className="site-container py-24 sm:py-28">
-        <div className="grid gap-14 lg:grid-cols-[0.85fr_1.15fr]">
-          <div>
-            <p className="section-kicker text-cuesta-300">Vamos conversar</p>
-            <h2 className="max-w-xl text-4xl font-black leading-tight tracking-[-0.035em] sm:text-5xl">Leve Coco Cuesta para o seu negócio ou evento.</h2>
-            <p className="mt-6 max-w-xl text-lg leading-8 text-white/60">Fale com nossa equipe para conhecer os sabores, consultar disponibilidade e encontrar a melhor forma de atendimento.</p>
-
-            <div className="mt-10 space-y-5 text-white/75">
-              <a href="https://maps.google.com/?q=Botucatu%20SP" target="_blank" rel="noopener noreferrer" className="focus-ring flex items-center gap-3 rounded-lg transition-colors hover:text-white">
-                <MapPin className="mt-0.5 flex-none text-cuesta-300" size={21} aria-hidden="true" />
-                <span>Botucatu — SP</span>
-              </a>
-              <a href="tel:+5514997445680" className="focus-ring flex items-center gap-3 rounded-lg transition-colors hover:text-white">
-                <Phone className="flex-none text-cuesta-300" size={21} aria-hidden="true" />
-                <span>(14) 99744-5680</span>
-              </a>
-              <a href="mailto:gelocococuesta@gmail.com" className="focus-ring flex items-center gap-3 rounded-lg transition-colors hover:text-white">
-                <Mail className="flex-none text-cuesta-300" size={21} aria-hidden="true" />
-                <span>gelocococuesta@gmail.com</span>
-              </a>
-            </div>
-
-            <a href="https://api.whatsapp.com/send?phone=5514997445680&text=Ol%C3%A1%2C%20gostaria%20de%20conhecer%20os%20produtos%20Coco%20Cuesta." target="_blank" rel="noopener noreferrer" className="focus-ring mt-10 inline-flex items-center gap-2 rounded-full bg-cuesta-300 px-7 py-4 font-bold text-ink-950 transition-all hover:-translate-y-0.5 hover:bg-cuesta-100">
-              <MessageCircle size={20} aria-hidden="true" />
-              Conversar pelo WhatsApp
+    <>
+    <section id="contato" className="contact-section" aria-labelledby="contact-title">
+      <div className="site-container contact-content">
+        <div id="revenda" className="contact-copy">
+          <p className="contact-eyebrow">Vamos conversar</p>
+          <h2 id="contact-title">Leve <span translate="no">Coco Cuesta</span> para o seu negócio ou evento.</h2>
+          <p className="contact-intro">Fale com nossa equipe para conhecer os sabores, consultar disponibilidade e encontrar a melhor forma de atendimento.</p>
+          <address className="contact-details">
+            <a href="https://maps.google.com/?q=Botucatu%20SP" target="_blank" rel="noopener noreferrer">
+              <MapPin size={21} aria-hidden="true" /><span>Botucatu, São Paulo</span>
             </a>
-          </div>
-
-          <div className="rounded-[2rem] border border-white/10 bg-white/[0.055] p-6 backdrop-blur-sm sm:p-9">
-            <h3 className="text-2xl font-extrabold">Envie uma mensagem</h3>
-            <p className="mt-2 text-white/60">Responderemos assim que possível.</p>
-            <form ref={formRef} onSubmit={handleSubmit} className="mt-8 space-y-5">
-              <div className="grid gap-5 sm:grid-cols-2">
-                <label className="block text-sm font-semibold text-white/75">
-                  Nome
-                  <input type="text" name="name" required autoComplete="name" className="focus-ring mt-2 w-full rounded-xl border border-white/10 bg-ink-950/70 px-4 py-3.5 text-base text-white placeholder:text-white/25" placeholder="Seu nome" />
-                </label>
-                <label className="block text-sm font-semibold text-white/75">
-                  E-mail
-                  <input type="email" name="email" required autoComplete="email" className="focus-ring mt-2 w-full rounded-xl border border-white/10 bg-ink-950/70 px-4 py-3.5 text-base text-white placeholder:text-white/25" placeholder="seu@email.com" />
-                </label>
+            <a href="tel:+5514997445680">
+              <Phone size={21} aria-hidden="true" /><span>(14) 99744-5680</span>
+            </a>
+            <a href="mailto:gelocococuesta@gmail.com">
+              <Mail size={21} aria-hidden="true" /><span>gelocococuesta@gmail.com</span>
+            </a>
+          </address>
+          <a className="button button-light contact-whatsapp" href={whatsappUrl('Olá! Gostaria de conversar sobre os produtos Coco Cuesta para meu negócio ou evento. Podem me informar a disponibilidade e as condições?')} target="_blank" rel="noopener noreferrer">
+            <MessageCircle size={20} aria-hidden="true" />Conversar pelo WhatsApp
+          </a>
+        </div>
+        <div className="contact-form-panel">
+          <h3 id="contact-form-title">Envie uma mensagem</h3>
+          <p id="contact-form-help" className="contact-form-help">Responderemos assim que possível. Todos os campos são obrigatórios.</p>
+          <form ref={formRef} onSubmit={handleSubmit} noValidate aria-labelledby="contact-form-title" aria-describedby="contact-form-help" className="contact-form">
+            <div className="contact-field-row">
+              <div className="contact-field">
+                <label htmlFor="contact-name">Nome</label>
+                <input
+                  id="contact-name"
+                  type="text"
+                  name="name"
+                  required
+                  maxLength={100}
+                  autoComplete="name"
+                  placeholder="Seu nome…"
+                  readOnly={status === 'loading'}
+                  aria-invalid={Boolean(errors.name)}
+                  aria-describedby={errors.name ? 'contact-name-error' : undefined}
+                  onBlur={(event) => handleFieldBlur('name', event)}
+                  onChange={(event) => handleFieldChange('name', event.currentTarget)}
+                />
+                {errors.name && <p id="contact-name-error" className="contact-field-error">{errors.name}</p>}
               </div>
-              <label className="block text-sm font-semibold text-white/75">
-                Como podemos ajudar?
-                <textarea name="message" required rows={5} className="focus-ring mt-2 w-full resize-y rounded-xl border border-white/10 bg-ink-950/70 px-4 py-3.5 text-base text-white placeholder:text-white/25" placeholder="Conte o que você precisa" />
-              </label>
-              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                <p className={`text-sm ${status === 'error' ? 'text-red-300' : 'text-cuesta-300'}`} role="status" aria-live="polite">
-                  {status === 'success' && 'Mensagem enviada com sucesso!'}
-                  {status === 'error' && 'Não foi possível enviar. Tente novamente ou fale pelo WhatsApp.'}
+              <div className="contact-field">
+                <label htmlFor="contact-email">E-mail</label>
+                <input
+                  id="contact-email"
+                  type="email"
+                  inputMode="email"
+                  name="email"
+                  required
+                  maxLength={254}
+                  autoComplete="email"
+                  spellCheck={false}
+                  autoCapitalize="none"
+                  placeholder="nome@exemplo.com…"
+                  readOnly={status === 'loading'}
+                  aria-invalid={Boolean(errors.email)}
+                  aria-describedby={errors.email ? 'contact-email-error' : undefined}
+                  onBlur={(event) => handleFieldBlur('email', event)}
+                  onChange={(event) => handleFieldChange('email', event.currentTarget)}
+                />
+                {errors.email && <p id="contact-email-error" className="contact-field-error">{errors.email}</p>}
+              </div>
+            </div>
+            <div className="contact-field">
+              <label htmlFor="contact-message">Como podemos ajudar?</label>
+              <textarea
+                id="contact-message"
+                name="message"
+                required
+                maxLength={4000}
+                rows={4}
+                autoComplete="off"
+                placeholder="Quais sabores você procura? Conte para a gente…"
+                readOnly={status === 'loading'}
+                aria-invalid={Boolean(errors.message)}
+                aria-describedby={errors.message ? 'contact-message-error' : undefined}
+                onBlur={(event) => handleFieldBlur('message', event)}
+                onChange={(event) => handleFieldChange('message', event.currentTarget)}
+              />
+              {errors.message && <p id="contact-message-error" className="contact-field-error">{errors.message}</p>}
+            </div>
+            <div className="contact-actions">
+            <div className={`contact-feedback${status === 'error' ? ' contact-feedback-error' : ''}`} role="status" aria-live="polite" aria-atomic="true">
+              {status === 'idle' && hasErrors && <p>Confira os campos indicados antes de enviar.</p>}
+              {status === 'loading' && <p>Enviando sua mensagem. Aguarde um momento.</p>}
+              {status === 'success' && <p>Mensagem enviada! A equipe responderá pelo e-mail informado.</p>}
+              {status === 'error' && (
+                <p>
+                  Não foi possível enviar. Seus dados continuam aqui. Tente novamente ou{' '}
+                  <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer">fale pelo WhatsApp</a>.
                 </p>
-                <button type="submit" disabled={status === 'loading'} className="focus-ring inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 font-bold text-ink-950 transition-colors hover:bg-cuesta-100 disabled:cursor-wait disabled:opacity-60">
-                  {status === 'loading' ? 'Enviando…' : 'Enviar mensagem'}
-                  <Send size={18} aria-hidden="true" />
-                </button>
-              </div>
-            </form>
-          </div>
+              )}
+            </div>
+            <button type="submit" disabled={status === 'loading'} className="button button-light contact-submit" aria-busy={status === 'loading'}>
+              {status === 'loading' ? 'Enviando mensagem…' : 'Enviar mensagem'}
+              {status === 'loading' ? <span className="contact-spinner" aria-hidden="true"><Loader2 size={19} /></span> : <Send size={18} aria-hidden="true" />}
+            </button>
+            </div>
+          </form>
         </div>
       </div>
-
-      <div className="border-t border-white/10">
-        <div className="site-container flex flex-col gap-8 py-9 sm:flex-row sm:items-center sm:justify-between">
-          <img src={logoImg} alt="Coco Cuesta" className="h-16 w-auto self-start" />
-          <div className="flex items-center gap-3">
-            <a href="https://www.instagram.com/cococuestaoficial/" target="_blank" rel="noopener noreferrer" className="focus-ring rounded-full border border-white/10 p-3 text-white/70 transition-colors hover:border-cuesta-300 hover:text-cuesta-300" aria-label="Instagram da Coco Cuesta"><Instagram size={21} /></a>
-            <a href="https://www.facebook.com/profile.php?id=100068796457626" target="_blank" rel="noopener noreferrer" className="focus-ring rounded-full border border-white/10 p-3 text-white/70 transition-colors hover:border-cuesta-300 hover:text-cuesta-300" aria-label="Facebook da Coco Cuesta"><Facebook size={21} /></a>
+    </section>
+    <footer className="contact-footer" aria-label="Coco Cuesta">
+      <div className="site-container contact-bottom">
+        <div className="contact-brand-row">
+          <img src={logoImg} alt="Coco Cuesta" width={900} height={570} loading="lazy" decoding="async" className="contact-logo" />
+          <div className="contact-socials">
+            <a href="https://www.instagram.com/cococuestaoficial/" target="_blank" rel="noopener noreferrer" aria-label="Instagram da Coco Cuesta">
+              <Instagram size={21} aria-hidden="true" />
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=100068796457626" target="_blank" rel="noopener noreferrer" aria-label="Facebook da Coco Cuesta">
+              <Facebook size={21} aria-hidden="true" />
+            </a>
           </div>
         </div>
-        <div className="site-container flex flex-col gap-3 border-t border-white/10 py-6 text-sm text-white/40 sm:flex-row sm:items-center sm:justify-between">
-          <p>&copy; {new Date().getFullYear()} Coco Cuesta. Todos os direitos reservados.</p>
-          <p>Desenvolvido por <a href="https://www.linkedin.com/in/luiz-dpedrozo/" target="_blank" rel="noopener noreferrer" className="focus-ring rounded text-white/70 hover:text-cuesta-300">Luiz Fernando</a></p>
+        <div className="contact-credits">
+          <p>&copy; {new Date().getFullYear()} <span translate="no">Coco Cuesta</span>. Todos os direitos reservados.</p>
+          <a href="https://www.linkedin.com/in/luiz-dpedrozo/" target="_blank" rel="noopener noreferrer">
+            Desenvolvido por Luiz Fernando
+          </a>
         </div>
       </div>
     </footer>
+    </>
   );
 };
 

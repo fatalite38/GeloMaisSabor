@@ -1,39 +1,20 @@
-import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
-import type { Flavor } from './FlavorsSection';
+import type { Flavor } from '../data/flavors';
+import { whatsappUrl } from '../data/contact';
 
-interface FlavorCardProps {
-  flavor: Flavor;
-  featured?: boolean;
-}
-
-const FlavorCard: React.FC<FlavorCardProps> = ({ flavor, featured = false }) => (
-  <article className={`group relative overflow-hidden border border-black/10 bg-white transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/10 ${featured ? 'rounded-[2rem]' : 'rounded-3xl'}`}>
-    <div className={`relative overflow-hidden ${featured ? 'h-[29rem] bg-gradient-to-b from-cuesta-50 to-white sm:h-[32rem] xl:h-[30rem]' : 'h-56'}`}>
-      <img
-        src={flavor.image}
-        alt={flavor.imageAlt}
-        loading="lazy"
-        className={`h-full w-full transition-transform duration-700 group-hover:scale-[1.035] ${featured ? 'object-contain p-5 [filter:drop-shadow(0_20px_18px_rgba(0,0,0,.18))] sm:p-7' : 'object-cover'}`}
-      />
-      <span className={`absolute left-5 top-5 rounded-full px-3 py-1.5 text-xs font-extrabold uppercase tracking-wider ${flavor.newPackaging ? 'bg-ink-950 text-white' : 'border border-black/10 bg-white/90 text-ink-900 backdrop-blur'}`}>
-        {flavor.newPackaging ? 'Nova embalagem' : 'Em transição'}
-      </span>
-    </div>
-
-    <div className={featured ? 'p-7' : 'p-6'}>
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <p className="mb-2 text-xs font-bold uppercase tracking-[0.16em] text-black/40">Sabor</p>
-          <h3 className={`${featured ? 'text-2xl' : 'text-xl'} font-extrabold tracking-tight text-ink-950`}>{flavor.name}</h3>
-        </div>
-        <span className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-black/[0.045] text-ink-900 transition-colors group-hover:bg-cuesta-300" aria-hidden="true">
-          <ArrowUpRight size={19} />
-        </span>
+export default function FlavorCard({ flavor }: { flavor: Flavor }) {
+  return (
+    <article className="flavor">
+      <div className="flavor-image" style={{ backgroundColor: flavor.color }}>
+        <img src={flavor.image} alt={`Embalagem oficial Coco Cuesta sabor ${flavor.name}`}
+          width={339} height={735} loading="lazy" decoding="async" />
       </div>
-      <p className="mt-4 leading-7 text-black/60">{flavor.description}</p>
-    </div>
-  </article>
-);
-
-export default FlavorCard;
+      <h3>{flavor.name}</h3>
+      <p>{flavor.description}</p>
+      <a href={whatsappUrl(`Olá! Quero conhecer o gelo saborizado Coco Cuesta de ${flavor.name}. Podem me informar a disponibilidade e as condições para pedir?`)}
+        target="_blank" rel="noopener noreferrer" aria-label={`Consultar sabor ${flavor.name} no WhatsApp`}>
+        Consultar sabor <ArrowUpRight size={17} aria-hidden="true" />
+      </a>
+    </article>
+  );
+}
