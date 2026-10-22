@@ -1,42 +1,28 @@
-import React from 'react';
-import aboutImg from '../assets/bannerImg.jpg';
+import historyLogo from '../assets/coco-cuesta/aprovados/logo-contorno-escuro-320.webp';
+import historyLogoLarge from '../assets/coco-cuesta/aprovados/logo-contorno-escuro-480.webp';
+import './History.css';
 
-const AboutSection: React.FC = () => {
+export default function AboutSection() {
   return (
-    <section id="sobre" className="py-20 bg-gradient-to-b from-primary-900 to bg-primary-800 ">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col lg:flex-row items-center">
-          <div className="lg:w-1/2 mb-10 lg:mb-0 lg:pr-10">
-            <h2 className="font-nunito font-bold text-4xl text-white mb-6">Sobre Nós</h2>
-            <p className="font-nunito text-white text-600 text-lg mb-6">
-              Fundada em Setembro de 2021 na cidade de Botucatu-SP, a Mais Sabor nasceu da inspiração de seu
-              idealizador, Fernando Pedrozo, que enxergou no gelo saborizado uma oportunidade de inovar e surpreender.
-            </p>
-            <p className="font-nunito text-white text-600 text-lg mb-6">
-              Desde então, temos nos dedicado ao desenvolvimento de produtos que unem qualidade, praticidade e sabor. Nossos gelos saborizados são produzidos com ingredientes selecionados e passam por um rigoroso controle de qualidade, garantindo uma experiência premium ao consumidor.
-            </p>
-            <p className="font-nunito text-white text-600 text-lg">
-              Atuamos em diversos segmentos, atendendo festas, casamentos, eventos corporativos, depósitos, adegas e o consumidor final que busca novas formas de tornar seus momentos mais agradáveis e refrescantes.
-            </p>
-            <p className="font-nunito text-white text-600 text-lg">
-              <br />Acreditamos que cada detalhe faz diferença. Por isso, a Mais Sabor não entrega apenas gelo, mas  entregamos inovação, cuidado e um novo conceito de sabor para os seus momentos.
-            </p>
+    <section id="sobre" className="history-section section-space" aria-labelledby="history-title">
+      <div className="site-container history-layout">
+        <div className="history-copy">
+          <h2 id="history-title">Nossa história</h2>
+          <div className="history-chapter">
+            <h3>Uma ideia que ganhou sabor</h3>
+            <p>A Mais Sabor foi fundada em setembro de 2021, em Botucatu, no interior de São Paulo. Seu idealizador, Fernando Pedrozo, encontrou no gelo saborizado uma oportunidade de inovar e apresentar outras formas de preparar bebidas.</p>
+            <p>Foi com essa proposta que a Gelo Mais Sabor começou sua trajetória: desenvolver produtos que levassem sabor e praticidade para o momento de servir.</p>
           </div>
-          
-          <div className="lg:w-1/2 relative">
-            <div className="relative h-80 lg:h-96 rounded-xl overflow-hidden shadow-xl">
-              <img 
-                src={aboutImg}
-                alt="Equipe Mais Sabor" 
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary-200/10 to-transparent"></div>
-            </div>
+          <div className="history-chapter">
+            <h3>A evolução para Coco Cuesta</h3>
+            <p>A Mais Sabor agora se apresenta como <span translate="no">Coco Cuesta</span>. A nova identidade se conecta à origem da marca em Botucatu e dá continuidade à história construída até aqui.</p>
+            <p>A mudança de nome e apresentação acontece aos poucos. Durante a transição, você pode encontrar produtos com embalagens das duas marcas.</p>
           </div>
+        </div>
+        <div className="history-logo-panel">
+          <img className="history-brand" src={historyLogoLarge} srcSet={`${historyLogo} 320w, ${historyLogoLarge} 480w`} sizes="(max-width:359px) calc(100vw - 100px), (max-width:700px) 240px, (max-width:999px) 320px, 400px" alt="Coco Cuesta" width={1620} height={971} loading="lazy" decoding="async" />
         </div>
       </div>
     </section>
   );
-};
-
-export default AboutSection;
+}

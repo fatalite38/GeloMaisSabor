@@ -1,78 +1,121 @@
-import React from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { ArrowUpRight } from 'lucide-react';
 import TestimonialCard from './TestimonialCard';
+import { testimonials, leaveReviewUrl } from '../data/testimonials';
+import './Reviews.css';
 
-interface Testimonial {
-  id: number;
-  name: string;
-  rating: number;
-  comment: string;
-}
+const mobileQuery = '(max-width: 700px)';
+const motionQuery = '(prefers-reduced-motion: reduce)';
 
-const testimonials: Testimonial[] = [
-  {
-    id: 1,
-    name: 'Thais',
-    rating: 5,
-    comment: 'O Melhor Gelo Saborizado de Todos os Tempos: Sabor, Qualidade e Variedade Incomparáveis.'
-  },
-  {
-    id: 2,
-    name: 'Willian',
-    rating: 5,
-    comment: 'O melhor gelo de sabor de Botucatu e região, com muito sabor e qualidade'
-  },
-  {
-    id: 3,
-    name: 'Leonardo',
-    rating: 5,
-    comment: ' Gelo com a melhor qualidade. O gelo não derrete rápido e o sabor é top!'
-  },
-  {
-  id: 5,
-  name: 'Boto Gelo',
-  rating: 5,
-  comment: 'Ótimo atendimento e produto muito bom, sem comparação. Com certeza o melhor do mercado!'
-  },
-  {
-  id: 5,
-  name: 'Livia',
-  rating: 5,
-  comment: 'Entrega rápida, embalagem impecável e o sabor surpreendeu demais. Excelente produto!'
-  },
-  {
-  id: 6,
-  name: 'Danilo',
-  rating: 5,
-  comment: 'Atendimento e produto diferenciado'
-  }
-];
+export default function TestimonialsSection() {
+  const stageRef = useRef<HTMLDivElement>(null);
+  const [perPage, setPerPage] = useState(() => window.matchMedia(mobileQuery).matches ? 1 : 3);
+  const [pageIndex, setPageIndex] = useState(0);
+  const [reducedMotion, setReducedMotion] = useState(() => window.matchMedia(motionQuery).matches);
+  const [userPaused, setUserPaused] = useState(() => window.matchMedia(motionQuery).matches);
+  const [hovered, setHovered] = useState(false);
+  const [inView, setInView] = useState(false);
+  const [tabActive, setTabActive] = useState(() => document.visibilityState === 'visible');
+  const pageCount = Math.ceil(testimonials.length / perPage);
+  const activePage = pageIndex % pageCount;
+  const autoEnabled = !userPaused && !reducedMotion;
+  const running = autoEnabled && !hovered && inView && tabActive;
 
-const TestimonialsSection: React.FC = () => {
+  useEffect(() => {
+    const query = window.matchMedia(mobileQuery);
+    const sync = (event: MediaQueryListEvent) => {
+      const nextPerPage = event.matches ? 1 : 3;
+      setPageIndex(current => Math.floor(current * perPage / nextPerPage));
+      setPerPage(nextPerPage);
+    };
+    query.addEventListener('change', sync);
+    return () => query.removeEventListener('change', sync);
+  }, [perPage]);
+
+  useEffect(() => {
+    const query = window.matchMedia(motionQuery);
+    const sync = (event: MediaQueryListEvent) => {
+      setReducedMotion(event.matches);
+      if (event.matches) setUserPaused(true);
+    };
+    query.addEventListener('change', sync);
+    return () => query.removeEventListener('change', sync);
+  }, []);
+
+  useEffect(() => {
+    const sync = () => setTabActive(document.visibilityState === 'visible');
+    document.addEventListener('visibilitychange', sync);
+    return () => document.removeEventListener('visibilitychange', sync);
+  }, []);
+
+  useEffect(() => {
+    const stage = stageRef.current;
+    if (!stage) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      setInView(entry.isIntersecting && entry.intersectionRatio >= 0.2);
+    }, { threshold: [0, 0.2] });
+    observer.observe(stage);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!running || pageCount < 2) return;
+    const timer = window.setInterval(() => setPageIndex(current => (current + 1) % pageCount), 5000);
+    return () => window.clearInterval(timer);
+  }, [running, pageCount]);
+
+  const navigate = (direction: number) => {
+    setUserPaused(true);
+    setPageIndex(current => (current + direction + pageCount) % pageCount);
+  };
+
   return (
-    <section id="depoimentos" className="py-20 bg-gradient-to-b from-white to-blue-50">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="font-nunito font-bold text-4xl text-primary-800 mb-4">O que dizem nossos clientes</h2>
-          <p className="font-nunito text-gray-600 text-xl max-w-2xl mx-auto">
-            Veja o que nossos clientes estão falando sobre a experiência com o gelo saborizado Mais Sabor
-          </p>
+    <section id="depoimentos" className="testimonials-section" aria-labelledby="reviews-title"
+      onPointerEnter={event => { if (event.pointerType === 'mouse') setHovered(true); }}
+      onPointerLeave={event => { if (event.pointerType === 'mouse') setHovered(false); }}
+      onFocusCapture={event => {
+        if (event.target.matches(':focus-visible')) setUserPaused(true);
+      }}>
+      <div className="site-container">
+        <div className="reviews-heading">
+          <div>
+            <p className="reviews-eyebrow">Experiências reais</p>
+            <h2 id="reviews-title">Quem experimenta, recomenda.</h2>
+          </div>
+          <a className="button button-secondary reviews-google" href={leaveReviewUrl} target="_blank" rel="noopener noreferrer">
+            Avaliar no Google <ArrowUpRight size={18} aria-hidden="true" />
+          </a>
         </div>
-
-        <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial) => (
-            <TestimonialCard key={testimonial.id} testimonial={testimonial} />
-          ))}
+        <div className="reviews-rotator" data-rotating={running} role="region" aria-roledescription="carrossel" aria-label="Depoimentos de clientes"
+          onKeyDown={event => {
+            if (event.altKey || event.ctrlKey || event.metaKey) return;
+            if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+              event.preventDefault();
+              navigate(event.key === 'ArrowLeft' ? -1 : 1);
+            }
+          }}>
+          <div ref={stageRef} id="review-slides" className="reviews-stage" aria-live={autoEnabled ? 'off' : 'polite'} aria-atomic="false">
+            {Array.from({ length: pageCount }, (_, index) => (
+              <div key={`${perPage}-${index}`} className="reviews-slide testimonial-grid" data-active={activePage === index}
+                role="group" aria-roledescription={perPage === 1 ? 'avaliação' : 'conjunto de avaliações'}
+                aria-label={`${index + 1} de ${pageCount}`} aria-hidden={activePage !== index}>
+                {testimonials.slice(index * perPage, (index + 1) * perPage).map(testimonial => (
+                  <TestimonialCard key={testimonial.id} testimonial={testimonial} />
+                ))}
+              </div>
+            ))}
+          </div>
+          <div className="reviews-navigation" role="group" aria-label="Escolher avaliações" aria-describedby="reviews-navigation-help">
+            {Array.from({ length: pageCount }, (_, index) => (
+              <button key={index} type="button" className="review-page" aria-controls="review-slides"
+                aria-current={activePage === index ? 'true' : undefined}
+                aria-label={`Mostrar ${perPage === 1 ? 'avaliação' : 'avaliações'} de ${testimonials.slice(index * perPage, (index + 1) * perPage).map(testimonial => testimonial.name).join(', ')}`}
+                onClick={() => { setUserPaused(true); setPageIndex(index); }} />
+            ))}
+          </div>
+          <p id="reviews-navigation-help" className="sr-only">Selecione um indicador para ler as avaliações. A seleção manual e o foco de teclado pausam a alternância automática.</p>
         </div>
-          <button
-                  type="button"
-                  className="px-6 py-4 bg-white border-pineapple-600 hover:bg-pineapple-600 text-primary-800 font-nunito font-bold rounded-lg transition-all duration-300 flex items-center align-middle transform hover:scale-105 shadow-lg mt-12 mx-auto"
-                >
-                  <a href="https://g.page/r/CVFHEu7L1Z_zEAI/review" target="_blank" rel="noopener noreferrer">Deixe sua avaliação aqui!</a>
-                </button>
       </div>
     </section>
-    
   );
-};
-
-export default TestimonialsSection;
+}

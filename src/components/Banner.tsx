@@ -1,37 +1,22 @@
-import React from 'react';
-import bannerImg from '../assets/banner3.jpg';
+import panorama from '../assets/coco-cuesta/aprovados/banner-aqua-1774.webp';
+import panoramaMedium from '../assets/coco-cuesta/aprovados/banner-aqua-1280.webp';
+import panoramaSmall from '../assets/coco-cuesta/aprovados/banner-aqua-768.webp';
+import portrait from '../assets/coco-cuesta/aprovados/banner-aqua-mobile-704.webp';
+import portraitSmall from '../assets/coco-cuesta/aprovados/banner-aqua-mobile-390.webp';
+import './CampaignHero.css';
 
-const Banner: React.FC = () => {
+export default function Banner() {
   return (
-    <section id="home" className="relative min-h-screen flex items-center">
-      {/* Background image with overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-primary-900 to-primary-900/30 z-0">
-        <img
-          src={bannerImg}
-          alt="banner2"
-          className="w-full h-full object-cover mix-blend-overlay"
-        />
+    <section id="home" className="aqua-hero" aria-labelledby="hero-title">
+      <div className="aqua-hero-copy">
+        <h1 id="hero-title">Sabor que refresca.</h1>
+        <p>Gelo saborizado Coco Cuesta.</p>
+        <a className="button button-dark" href="#produtos">Conhecer os sabores</a>
       </div>
-
-      {/* Content */}
-      <div className="container mx-auto px-5 py-12 relative inset-0 bg-black/3 z-0 text-center">
-        <h1 className="font-nunito font-bold text-4xl md:text-6xl text-white leading-tight mb-6">
-          Refresque seus dias com <br />
-          <span className="text-pineapple-500">Mais Sabor!</span>
-        </h1>
-        
-        {/* <p className="font-nunito text-white text-xl md:text-2xl max-w-2xl mx-auto mb-10">
-          Cubos de gelo saborizado para deixar suas bebidas e eventos muito mais especiais
-        </p>
-         */}
-        <button
-          className="bg-pineapple-500 hover:bg-pineapple-600 text-primary-800 font-nunito font-bold text-lg px-8 py-3 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg"
-        >
-          <a href="#produtos">Experimente Agora</a>
-        </button>
-      </div>
+      <picture className="aqua-hero-art">
+        <source media="(max-width: 600px)" srcSet={`${portraitSmall} 390w, ${portrait} 704w`} sizes="100vw" width={704} height={880} />
+        <img src={panorama} srcSet={`${panoramaSmall} 768w, ${panoramaMedium} 1280w, ${panorama} 1774w`} sizes="100vw" alt="Sachês Coco Cuesta de Água de Coco, Maracujá e Melancia entre frutas, gotas de água e gelo sobre fundo aqua" width={1774} height={887} fetchPriority="high" />
+      </picture>
     </section>
   );
-};
-
-export default Banner;
+}

@@ -1,0 +1,83 @@
+.contact-section,.contact-footer{background:#000;color:#fff}
+.contact-content{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);align-items:start;gap:56px;padding-top:88px;padding-bottom:80px}
+.contact-copy{min-width:0;scroll-margin-top:128px}
+.contact-eyebrow{margin-bottom:18px;color:#0094f6;font-size:13px;font-weight:600;letter-spacing:.15em;line-height:1.5;text-transform:uppercase}
+.contact-copy h2{max-width:17ch;font-size:clamp(36px,3.35vw,46px);line-height:1.08;letter-spacing:-.04em}
+.contact-intro{max-width:43ch;margin-top:24px;color:#c3cdd5;font-size:16px;line-height:1.75}
+.contact-details{display:grid;gap:4px;min-width:0;margin-top:28px;font-style:normal}
+.contact-details a{display:flex;align-items:center;gap:12px;min-height:44px;max-width:100%;width:fit-content;font-size:16px;line-height:1.6;color:#d5dfe5;border-radius:8px}
+.contact-details a span{min-width:0;overflow-wrap:anywhere}
+.contact-details a svg{flex:none;color:#0094f6}
+.contact-details a:hover{color:#9bd7ff}
+.contact-whatsapp{margin-top:28px}
+.contact-form-panel{min-width:0;padding:32px;background:#101010;border:1px solid #303030;border-radius:28px}
+.contact-form-panel h3{font-size:28px;line-height:1.2}
+.contact-form-help{max-width:52ch;margin-top:10px;color:#c3cdd5;font-size:16px;line-height:1.65}
+.contact-form{display:grid;gap:22px;margin-top:28px}
+.contact-field{min-width:0}
+.contact-field-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
+.contact-field label{display:block;margin-bottom:10px;font-size:16px;font-weight:500;line-height:1.5}
+.contact-field input,.contact-field textarea{display:block;width:100%;min-width:0;min-height:54px;padding:14px 16px;border:1px solid #82909a;border-radius:12px;color:#fff;background:#000;font-size:16px;line-height:1.6;transition:border-color 160ms ease}
+.contact-field textarea{min-height:168px;resize:vertical}
+.contact-field input::placeholder,.contact-field textarea::placeholder{color:#adb9c2;opacity:1}
+.contact-field input:hover,.contact-field textarea:hover{border-color:#d5e7f4}
+.contact-field [aria-invalid=true]{border-color:#ffb3b3}
+.contact-field-error{margin-top:10px;color:#ffb3b3;font-size:16px;line-height:1.65}
+.contact-actions{display:flex;align-items:center;gap:20px}
+.contact-submit{flex:none;margin-left:auto;min-height:54px}
+.contact-submit:disabled{cursor:wait;opacity:.6}
+.contact-feedback{flex:1;min-width:0;color:#eaf6ff;font-size:16px;line-height:1.75;overflow-wrap:anywhere}
+.contact-feedback p{font-size:16px}
+.contact-feedback-error{color:#ffb3b3}
+.contact-feedback a{display:inline-flex;align-items:center;min-height:44px;padding:8px 12px;margin-top:6px;background:#fff;color:#000;border-radius:999px;text-decoration:none}
+.contact-feedback a:hover{background:#d8efff}
+.contact-spinner{display:inline-flex;transform-origin:center;animation:contact-spin 900ms linear infinite}
+.contact-section :focus-visible,.contact-footer :focus-visible{outline-color:#9bd7ff}
+.contact-footer{border-top:1px solid #292929}
+.contact-bottom{padding-top:28px;padding-bottom:max(24px,env(safe-area-inset-bottom))}
+.contact-brand-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px 32px}
+.contact-logo{display:block;width:108px;height:auto;flex:none}
+.contact-socials{display:flex;flex:none;gap:12px}
+.contact-socials a{display:flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:50%;color:#fff;background:#173041}
+.contact-socials a:hover{background:#0094f6;color:#000}
+.contact-credits{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 28px;margin-top:24px;padding-top:18px;border-top:1px solid #292929;color:#b4c1cb}
+.contact-credits p,.contact-credits a{font-size:16px;line-height:1.65}
+.contact-credits a{display:inline-flex;align-items:center;min-height:44px;max-width:100%;padding-block:8px;color:#d5dfe5;border-radius:8px}
+.contact-credits a:hover{color:#9bd7ff}
+@media(max-width:1199px){
+ .contact-content{gap:40px}
+ .contact-form-panel{padding:26px}
+ .contact-field-row{gap:16px}
+ .contact-actions{align-items:flex-end;flex-direction:column;gap:12px}
+ .contact-feedback{width:100%}
+}
+@media(max-width:999px){
+ .contact-content{grid-template-columns:1fr;padding-top:64px;padding-bottom:64px;gap:40px}
+ .contact-copy h2{max-width:19ch;font-size:44px}
+ .contact-intro{max-width:54ch}
+ .contact-form-panel{padding:30px}
+ .contact-actions{flex-direction:row;align-items:center;gap:20px}
+}
+@media(max-width:700px){
+ .contact-content{padding-top:56px;padding-bottom:48px;gap:36px}
+ .contact-copy h2{font-size:36px;max-width:16ch}
+ .contact-eyebrow{margin-bottom:16px;font-size:12px}
+ .contact-intro{margin-top:20px}
+ .contact-details{margin-top:24px}
+ .contact-whatsapp{margin-top:24px;padding-inline:18px}
+ .contact-form-panel{padding:22px 12px;border-radius:22px}
+ .contact-form-panel h3{font-size:24px}
+ .contact-form{margin-top:24px;gap:22px}
+ .contact-field-row{grid-template-columns:1fr;gap:22px}
+ .contact-field input,.contact-field textarea{padding-inline:12px}
+ .contact-field textarea{min-height:168px}
+ .contact-actions{flex-direction:column;align-items:stretch;gap:12px}
+ .contact-submit{width:100%;margin-left:0;padding-inline:10px;gap:6px}
+ .contact-logo{width:104px}
+ .contact-brand-row{gap:18px}
+ .contact-credits{flex-direction:column;align-items:flex-start;margin-top:22px;padding-top:16px}
+ .contact-bottom{padding-top:24px;padding-bottom:max(28px,env(safe-area-inset-bottom))}
+}
+@media(max-width:359px){.contact-copy h2{font-size:32px}}
+@media(prefers-reduced-motion:reduce){.contact-spinner{animation:none}}
+@keyframes contact-spin{to{transform:rotate(360deg)}}

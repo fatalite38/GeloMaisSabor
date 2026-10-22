@@ -1,107 +1,61 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Menu, X } from 'lucide-react';
-import logoImg from '../assets/logoImg.png';
+import logoImg from '../assets/coco-cuesta/logo-coco-cuesta.webp';
 
-const Header: React.FC = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+const navigation = [
+  { label: 'Sabores', href: '#produtos' },
+  { label: 'Nossa história', href: '#sobre' },
+  { label: 'Avaliações', href: '#depoimentos' },
+];
 
-  // Verifica se o usuário está rolando a página
+export default function Header() {
+  const [open, setOpen] = useState(false);
+  const menuButton = useRef<HTMLButtonElement>(null);
+  const header = useRef<HTMLElement>(null);
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
+    const desktop = window.matchMedia('(min-width: 1180px)');
+    const closeOnResize = () => { if (desktop.matches) setOpen(false); };
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && open) {
+        setOpen(false);
+        menuButton.current?.focus();
       }
     };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
+    const closeOutside = (event: PointerEvent) => {
+      if (!header.current?.contains(event.target as Node)) setOpen(false);
+    };
+    desktop.addEventListener('change', closeOnResize);
+    document.addEventListener('keydown', closeOnEscape);
+    document.addEventListener('pointerdown', closeOutside);
+    return () => {
+      desktop.removeEventListener('change', closeOnResize);
+      document.removeEventListener('keydown', closeOnEscape);
+      document.removeEventListener('pointerdown', closeOutside);
+    };
+  }, [open]);
   return (
-    <header
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'
-      }`}
-    >
-      <div className="container mx-auto px-4 flex justify-between items-center">
-        <div className="flex items-center">
-          <img 
-            src={logoImg}
-            alt="Cubos de gelo coloridos"
-            className="w-12 h-12 rounded-full"
-            //tamanho
-            style={{ width: '140px', height: '100px'  }}
-          />
-          <span 
-            className={`ml-2 font-nunito font-bold text-2xl transition-colors duration-300 ${
-              isScrolled ? 'text-primary-600' : 'text-white'
-            }`}
-          >
-          </span>
-        </div>
-
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex">
-          <ul className="flex space-x-8">
-            {['Home', 'Produtos', 'Sobre', 'Depoimentos', 'Contato'].map((item) => (
-              <li key={item}>
-                <a
-                  href={`#${item.toLowerCase()}`}
-                  className={`font-nunito font-bold hover:text-primary-300 transition-colors duration-300 ${
-                    isScrolled ? 'text-gray-700' : 'text-white'
-                  }`}
-                >
-                  {item}
-                </a>
-              </li>
-            ))}
-          </ul>
+    <header className="site-header" ref={header} onBlur={(event) => {
+      if (!event.currentTarget.contains(event.relatedTarget as Node)) setOpen(false);
+    }}>
+      <div className="site-container header-inner">
+        <a href="#home" className="brand-link" aria-label="Coco Cuesta — início" onClick={() => setOpen(false)}>
+          <img src={logoImg} alt="Coco Cuesta" width={900} height={570} />
+        </a>
+        <nav className="desktop-nav" aria-label="Navegação principal">
+          {navigation.map(item => <a key={item.href} href={item.href}>{item.label}</a>)}
         </nav>
-
-        {/* Mobile Menu Button */}
-        <button
-          className="md:hidden z-50"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          aria-label="Toggle menu"
-        >
-          {isMenuOpen ? (
-            <X size={30} className="text-white" />
-          ) : (
-            <Menu
-              size={30} 
-              className={`${isScrolled ? 'text-gray-700' : 'text-white'}`} 
-            />
-          )}
-        </button>
-
-        {/* Mobile Navigation */}
-        <div
-          className={`fixed inset-0 bg-gray-800 bg-opacity-95 flex flex-col items-center justify-center text-gray-700 z-40 transform transition-transform duration-300 ease-in-out ${
-            isMenuOpen ? 'translate-x-0' : 'translate-x-full'
-          } md:hidden`}
-        >
-          <div className="flex flex-col items-center justify-center h-full">
-            <ul className="text-center space-y-10">
-              {['Home', 'Produtos', 'Sobre', 'Depoimentos', 'Contato'].map((item) => (
-                <li key={item}>
-                  <a
-                    href={`#${item.toLowerCase()}`}
-                    className="font-nunito text-2xl font-bold text-gray-200 hover:text-primary-500 transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+        <div className="header-actions">
+          <a className="button button-light header-contact" href="#contato">Contato</a>
+          <button className="menu-toggle" ref={menuButton} type="button" onClick={() => setOpen(!open)}
+            aria-controls="mobile-menu" aria-expanded={open} aria-label={open ? 'Fechar menu' : 'Abrir menu'}>
+            {open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
+          </button>
         </div>
       </div>
+      <nav id="mobile-menu" className="mobile-nav" aria-label="Navegação móvel" hidden={!open}>
+        {navigation.map(item => <a key={item.href} href={item.href} onClick={() => setOpen(false)}>{item.label}</a>)}
+        <a href="#contato" onClick={() => setOpen(false)}>Contato</a>
+      </nav>
     </header>
   );
-};
-
-export default Header;
+}

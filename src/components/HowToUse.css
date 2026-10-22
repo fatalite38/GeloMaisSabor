@@ -1,0 +1,17 @@
+.usage-section{padding-block:64px;background:#002744;color:#fff}
+.usage-section h2{margin:0 0 36px}
+.usage-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(28px,4vw,56px);margin:0;padding:0;list-style:none}
+.usage-step{min-width:0}
+.usage-mark{display:flex;align-items:center;gap:16px;margin-bottom:20px;color:#9bd7ff;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:600;line-height:1}
+.usage-mark svg{display:block;width:44px;height:44px;flex:none;padding:10px;border-radius:14px;background:#0094f6;color:#002744}
+.usage-copy h3{margin:0;font-size:25px;line-height:1.25;letter-spacing:-.025em}
+.usage-copy p{max-width:35ch;margin-top:12px;color:#d8efff;font-size:17px;line-height:1.7}
+@media(max-width:700px){
+ .usage-section{padding-block:48px}
+ .usage-section h2{margin-bottom:30px}
+ .usage-steps{grid-template-columns:1fr;gap:28px}
+ .usage-step{display:grid;grid-template-columns:44px minmax(0,1fr);gap:16px}
+ .usage-mark{position:relative;align-self:start;margin:0;flex-direction:column;gap:10px}
+ .usage-copy h3{font-size:23px}
+ .usage-copy p{max-width:38ch;margin-top:8px;font-size:16px;line-height:1.65}
+}
