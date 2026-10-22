@@ -1,16 +1,27 @@
-import { useEffect, useState } from 'react';
-import { MessageCircle } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 import { flavors } from '../data/flavors';
-import { whatsappUrl } from '../data/contact';
+import CacoFlavor from './CacoFlavor';
+import './Flavors.css';
 
 function flavorFromUrl() {
   const id = new URLSearchParams(window.location.search).get('sabor');
   return flavors.find(flavor => flavor.id === id)?.id ?? flavors[0].id;
 }
 
+function revealFlavor(selector: HTMLDivElement | null, id: string) {
+  const button = selector?.querySelector<HTMLButtonElement>(`[data-flavor="${id}"]`);
+  if (!selector || !button) return;
+  const left = button.offsetLeft - 8;
+  const right = button.offsetLeft + button.offsetWidth + 8;
+  if (left >= selector.scrollLeft && right <= selector.scrollLeft + selector.clientWidth) return;
+  // Align to this item's snap position; a minimal scroll can snap back and crop it.
+  // Only the horizontal rail moves, leaving the page's vertical position intact.
+  selector.scrollTo({ left, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+}
+
 export default function FlavorsSection() {
   const [selectedId, setSelectedId] = useState(flavorFromUrl);
-  const selected = flavors.find(flavor => flavor.id === selectedId) ?? flavors[0];
+  const selectorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const syncSelection = () => setSelectedId(flavorFromUrl());
@@ -18,55 +29,64 @@ export default function FlavorsSection() {
     return () => window.removeEventListener('popstate', syncSelection);
   }, []);
 
+  useEffect(() => {
+    const selector = selectorRef.current;
+    if (!selector) return;
+    const observer = new IntersectionObserver(entries => {
+      if (!entries.some(entry => entry.isIntersecting)) return;
+      flavors.forEach(flavor => { const image = new Image(); image.src = flavor.image; });
+      observer.disconnect();
+    }, { rootMargin: '200px' });
+    observer.observe(selector);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    revealFlavor(selectorRef.current, selectedId);
+  }, [selectedId]);
+
   const selectFlavor = (id: string) => {
-    if (id === selectedId) return;
+    if (id === selectedId) { revealFlavor(selectorRef.current, id); return; }
     const url = new URL(window.location.href);
     url.searchParams.set('sabor', id);
+    url.searchParams.delete('receita');
     window.history.pushState({}, '', url);
     setSelectedId(id);
   };
 
   return (
-    <section id="produtos" className="tasting" aria-labelledby="sabores-title">
+    <section id="produtos" className="flavors-section" aria-labelledby="sabores-title">
       <div className="site-container">
-        <div className="tasting-heading">
+        <div className="flavors-heading">
           <h2 id="sabores-title">Escolha seu sabor.</h2>
-          <p>Gelo saborizado em embalagens de 190 g.</p>
         </div>
-        <div className="flavor-options" role="group" aria-label="Escolher sabor Coco Cuesta">
+        <div className="flavor-selector" ref={selectorRef} role="group" aria-label="Escolher sabor Coco Cuesta"
+          onKeyDown={event => {
+            if (event.altKey || event.ctrlKey || event.metaKey) return;
+            const current = flavors.findIndex(flavor => flavor.id === (event.target as HTMLButtonElement).dataset.flavor);
+            if (current < 0 || !['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+            event.preventDefault();
+            const next = event.key === 'Home' ? 0 : event.key === 'End' ? flavors.length - 1
+              : (current + (event.key === 'ArrowRight' ? 1 : -1) + flavors.length) % flavors.length;
+            selectorRef.current?.querySelector<HTMLButtonElement>(`[data-flavor="${flavors[next].id}"]`)?.focus({ preventScroll: true });
+            selectFlavor(flavors[next].id);
+          }}>
           {flavors.map(flavor => (
-            <button key={flavor.id} type="button" className="flavor-option" aria-pressed={selectedId === flavor.id}
+            <button key={flavor.id} type="button" className="flavor-choice" aria-pressed={selectedId === flavor.id}
+              data-flavor={flavor.id}
               aria-controls="sabor-destaque" onClick={() => selectFlavor(flavor.id)}
-              style={{ '--flavor-accent': flavor.accent } as React.CSSProperties}>
-              <img src={flavor.image} alt="" width={339} height={735} loading="lazy" decoding="async" />
-              <span>{flavor.name}</span>
-              <span className="option-state" aria-hidden="true">{selectedId === flavor.id ? 'Selecionado' : ''}</span>
+              onPointerEnter={() => { const image = new Image(); image.src = flavor.image; }}
+              onFocus={() => { const image = new Image(); image.src = flavor.image; revealFlavor(selectorRef.current, flavor.id); }}
+              style={{ '--flavor-surface': flavor.color } as React.CSSProperties}>
+              <span className="flavor-choice-media">
+                <img src={flavor.image} alt="" width={339} height={735} loading="lazy" decoding="async" />
+              </span>
+              <span className="flavor-choice-name">{flavor.name}</span>
             </button>
           ))}
         </div>
       </div>
-      <div className="tasting-stage" style={{ backgroundColor: selected.color, '--flavor-accent': selected.accent } as React.CSSProperties}>
-        <article id="sabor-destaque" className="site-container tasting-layout" aria-labelledby="selected-flavor-title">
-          <figure className="tasting-pack">
-            <img src={selected.image} alt={`Embalagem oficial Coco Cuesta sabor ${selected.name}, 190 g`} width={339} height={735} loading="lazy" decoding="async" />
-          </figure>
-          <div className="tasting-detail">
-            <div className="tasting-title">
-              <h3 id="selected-flavor-title">{selected.name}</h3>
-              <p className="tasting-profile">{selected.description}</p>
-            </div>
-            <div className="serving-suggestion">
-              <h4>Combina com</h4>
-              <p className="serving-pair">{selected.serving}</p>
-              <a className="button button-secondary tasting-how" href="#ocasioes">Ver como servir</a>
-            </div>
-            <a className="button button-dark tasting-order" href={whatsappUrl(`Olá! Quero pedir Coco Cuesta de ${selected.name}. Podem informar a disponibilidade, as quantidades e as condições de entrega?`)} target="_blank" rel="noopener noreferrer">
-              <MessageCircle size={19} aria-hidden="true" /> Pedir {selected.name}
-            </a>
-          </div>
-        </article>
-      </div>
-      <p className="sr-only" role="status" aria-live="polite">Sabor selecionado: {selected.name}.</p>
+      <CacoFlavor selectedId={selectedId} />
     </section>
   );
 }

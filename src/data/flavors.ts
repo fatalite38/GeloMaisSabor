@@ -15,9 +15,9 @@ export interface Flavor {
   preparation: string;
 }
 export const flavors: Flavor[] = [
-  { id: 'coco', name: 'Água de Coco', image: coco, description: 'Tropical e refrescante.', color: '#eaf6ff', accent: '#0094f6', serving: 'Água com gás + limão', preparation: 'Adicione o gelo sabor Água de Coco à água com gás e finalize com uma rodela de limão.' },
-  { id: 'maracuja', name: 'Maracujá', image: maracuja, description: 'Marcante e cítrico.', color: '#fff7ce', accent: '#ffdc18', serving: 'Chá gelado', preparation: 'Experimente o gelo sabor Maracujá no seu chá gelado favorito e misture antes de servir.' },
-  { id: 'melancia', name: 'Melancia', image: melancia, description: 'Leve e refrescante.', color: '#eef4f1', accent: '#000000', serving: 'Água com gás', preparation: 'Coloque o gelo sabor Melancia no copo e complete com água com gás.' },
-  { id: 'morango', name: 'Morango', image: morango, description: 'Doce e aromático.', color: '#fff0f3', accent: '#e51d45', serving: 'Limonada', preparation: 'Adicione o gelo sabor Morango à limonada. Misture e ajuste a combinação ao seu gosto.' },
-  { id: 'maca', name: 'Maçã Verde', image: maca, description: 'Um toque levemente ácido.', color: '#f0f8dc', accent: '#8bcf16', serving: 'Água com gás ou soda', preparation: 'Experimente o gelo sabor Maçã Verde com água com gás ou soda e misture no copo.' },
+  { id: 'coco', name: 'Água de Coco', image: coco, description: 'Tropical e refrescante, para combinações leves e momentos que pedem frescor.', color: '#eaf6ff', accent: '#0094f6', serving: 'Água com gás + limão', preparation: 'Adicione o gelo sabor Água de Coco à água com gás e finalize com uma rodela de limão.' },
+  { id: 'maracuja', name: 'Maracujá', image: maracuja, description: 'Marcante e cítrico, uma escolha vibrante para dar personalidade à bebida.', color: '#fff7ce', accent: '#ffdc18', serving: 'Chá gelado', preparation: 'Experimente o gelo sabor Maracujá no seu chá gelado favorito e misture antes de servir.' },
+  { id: 'melancia', name: 'Melancia', image: melancia, description: 'Leve e refrescante, com uma apresentação que chama atenção em qualquer ocasião.', color: '#eef4f1', accent: '#000000', serving: 'Água com gás', preparation: 'Coloque o gelo sabor Melancia no copo e complete com água com gás.' },
+  { id: 'morango', name: 'Morango', image: morango, description: 'Um sabor doce e aromático para combinações cheias de personalidade.', color: '#fff0f3', accent: '#e51d45', serving: 'Limonada', preparation: 'Adicione o gelo sabor Morango à limonada. Misture e ajuste a combinação ao seu gosto.' },
+  { id: 'maca', name: 'Maçã Verde', image: maca, description: 'Refrescância e um toque levemente ácido para equilibrar sua bebida.', color: '#f0f8dc', accent: '#8bcf16', serving: 'Água com gás ou soda', preparation: 'Experimente o gelo sabor Maçã Verde com água com gás ou soda e misture no copo.' },
 ];

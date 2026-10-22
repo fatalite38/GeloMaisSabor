@@ -1,5 +1,4 @@
 .testimonials-section{background:#f7f7f3;padding-block:64px 68px}
-.testimonials-section .site-container{max-width:1140px}
 .reviews-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;margin-bottom:40px}
 .reviews-heading>div{min-width:0;max-width:580px}
 .reviews-eyebrow{color:#005496;font-size:12px;line-height:1.5;font-weight:600;letter-spacing:.15em;text-transform:uppercase;margin-bottom:14px}
@@ -12,15 +11,12 @@
 .testimonials-section .stars{display:flex;gap:3px;color:#ad7100;margin-bottom:20px}
 .testimonials-section .testimonial blockquote{margin:0 0 24px;font-size:17px;line-height:1.75;text-wrap:pretty;overflow-wrap:anywhere}
 .testimonials-section .review-author{align-self:stretch;margin-top:auto;padding-top:18px;border-top:1px solid #deded8;font-family:'DM Sans',sans-serif;font-weight:600;font-size:16px;line-height:1.6;letter-spacing:0}
-.reviews-navigation{display:flex;align-items:center;gap:10px;margin-top:26px;padding-right:max(0px,calc(84px - clamp(22px,4vw,56px)))}
-.reviews-control{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:44px;min-height:44px;border:0;border-radius:999px;background:#e4f2fc;color:#003f73;font-size:16px;font-weight:600;line-height:1.5;padding:10px}
-.reviews-control:hover{background:#cde9fc;color:#000}
-.reviews-control svg{flex:none}
-.reviews-toggle{order:2;width:124px;min-width:124px;flex:none;padding-inline:16px}
-.reviews-toggle:disabled{opacity:1;background:#e4f2fc;color:#41515c;cursor:default}
-.reviews-previous{order:1}
-.reviews-next{order:3}
-.reviews-position{order:4;margin-left:8px;color:#53616a;font-size:14px;line-height:1.5;font-variant-numeric:tabular-nums;white-space:nowrap}
+.reviews-navigation{display:flex;align-items:center;flex-wrap:wrap;gap:2px;width:fit-content;max-width:100%;margin-top:20px}
+.review-page{display:grid;place-items:center;width:44px;height:44px;flex:none;padding:0;border:0;border-radius:50%;background:transparent}
+.review-page::before{content:'';width:8px;height:8px;border-radius:999px;background:#6a7b87}
+.review-page:hover{background:#e4f2fc}
+.review-page:hover::before{background:#003f73}
+.review-page[aria-current=true]::before{width:22px;background:#005496}
 @media(max-width:899px){
  .reviews-heading{gap:24px}
  .reviews-heading>div{max-width:400px}
@@ -39,9 +35,6 @@
  .testimonials-section .testimonial{padding:24px;border-radius:24px}
  .testimonials-section .stars{margin-bottom:16px}
  .testimonials-section .testimonial blockquote{margin-bottom:24px;font-size:17px}
- .reviews-navigation{gap:8px;flex-wrap:wrap;margin-top:24px;padding-right:62px}
- .reviews-toggle{width:116px;min-width:116px;padding-inline:12px}
- .reviews-position{margin-left:4px}
+ .reviews-navigation{margin-top:18px}
 }
-@media(max-width:359px){.reviews-navigation{gap:4px}.reviews-position{flex-basis:100%;margin:0 0 0 80px}}
 @media(prefers-reduced-motion:reduce){.testimonials-section .reviews-slide{transition:none!important}}

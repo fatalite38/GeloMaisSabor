@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowLeft, ArrowRight, ArrowUpRight, Pause, Play } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import TestimonialCard from './TestimonialCard';
 import { testimonials, leaveReviewUrl } from '../data/testimonials';
 import './Reviews.css';
@@ -105,21 +105,15 @@ export default function TestimonialsSection() {
               </div>
             ))}
           </div>
-          <div className="reviews-navigation" role="group" aria-label="Controles das avaliações">
-            <button type="button" className="reviews-control reviews-toggle" aria-controls="review-slides" disabled={reducedMotion}
-              aria-label={reducedMotion ? 'Reprodução automática desativada pela preferência de movimento reduzido' : userPaused ? 'Retomar rotação das avaliações' : 'Pausar rotação das avaliações'}
-              onClick={() => setUserPaused(current => !current)}>
-              {userPaused || reducedMotion ? <Play size={17} aria-hidden="true" /> : <Pause size={17} aria-hidden="true" />}
-              {reducedMotion ? 'Manual' : userPaused ? 'Retomar' : 'Pausar'}
-            </button>
-            <button type="button" className="reviews-control reviews-previous" aria-controls="review-slides" aria-label="Avaliações anteriores" onClick={() => navigate(-1)}>
-              <ArrowLeft size={20} aria-hidden="true" />
-            </button>
-            <button type="button" className="reviews-control reviews-next" aria-controls="review-slides" aria-label="Próximas avaliações" onClick={() => navigate(1)}>
-              <ArrowRight size={20} aria-hidden="true" />
-            </button>
-            <span className="reviews-position" aria-hidden="true">{activePage + 1} / {pageCount}</span>
+          <div className="reviews-navigation" role="group" aria-label="Escolher avaliações" aria-describedby="reviews-navigation-help">
+            {Array.from({ length: pageCount }, (_, index) => (
+              <button key={index} type="button" className="review-page" aria-controls="review-slides"
+                aria-current={activePage === index ? 'true' : undefined}
+                aria-label={`Mostrar ${perPage === 1 ? 'avaliação' : 'avaliações'} de ${testimonials.slice(index * perPage, (index + 1) * perPage).map(testimonial => testimonial.name).join(', ')}`}
+                onClick={() => { setUserPaused(true); setPageIndex(index); }} />
+            ))}
           </div>
+          <p id="reviews-navigation-help" className="sr-only">Selecione um indicador para ler as avaliações. A seleção manual e o foco de teclado pausam a alternância automática.</p>
         </div>
       </div>
     </section>

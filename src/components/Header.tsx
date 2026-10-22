@@ -4,10 +4,8 @@ import logoImg from '../assets/coco-cuesta/logo-coco-cuesta.webp';
 
 const navigation = [
   { label: 'Sabores', href: '#produtos' },
-  { label: 'Como servir', href: '#ocasioes' },
   { label: 'Nossa história', href: '#sobre' },
   { label: 'Avaliações', href: '#depoimentos' },
-  { label: 'Revenda', href: '#revenda' },
 ];
 
 export default function Header() {

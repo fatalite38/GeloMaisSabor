@@ -3,9 +3,9 @@ import Banner from './components/Banner';
 import FlavorsSection from './components/FlavorsSection';
 import AboutSection from './components/AboutSection';
 import Footer from './components/Footer';
-import ExperienceSection from './components/ExperienceSection';
 import TestimonialsSection from './components/TestimonialsSection';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
+import HowToUseSection from './components/HowToUseSection';
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
       <main id="conteudo" tabIndex={-1}>
         <Banner />
         <FlavorsSection />
-        <ExperienceSection />
+        <HowToUseSection />
         <AboutSection />
         <TestimonialsSection />
         {/* Galeria preservada nos componentes para retomar com fotos da fábrica. */}

@@ -1,5 +1,4 @@
 .contact-section,.contact-footer{background:#000;color:#fff}
-.contact-section .contact-content,.contact-footer .contact-bottom{max-width:1140px}
 .contact-content{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);align-items:start;gap:56px;padding-top:88px;padding-bottom:80px}
 .contact-copy{min-width:0;scroll-margin-top:128px}
 .contact-eyebrow{margin-bottom:18px;color:#0094f6;font-size:13px;font-weight:600;letter-spacing:.15em;line-height:1.5;text-transform:uppercase}
@@ -46,7 +45,6 @@
 .contact-credits a{display:inline-flex;align-items:center;min-height:44px;max-width:100%;padding-block:8px;color:#d5dfe5;border-radius:8px}
 .contact-credits a:hover{color:#9bd7ff}
 @media(max-width:1199px){
- .contact-section .contact-content,.contact-footer .contact-bottom{padding-right:max(84px,calc(env(safe-area-inset-right) + 84px))}
  .contact-content{gap:40px}
  .contact-form-panel{padding:26px}
  .contact-field-row{gap:16px}
