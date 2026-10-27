@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { flavors } from '../data/flavors';
 import caco from '../assets/coco-cuesta/aprovados/caco-apresentando.webp';
 import cacoSmall from '../assets/coco-cuesta/aprovados/caco-apresentando-768.webp';
 
 const motionQuery = '(prefers-reduced-motion: reduce)';
 
-export default function CacoFlavor({ selectedId }: { selectedId: string }) {
+export default function CacoFlavor({ selectedId, selector }: { selectedId: string; selector: ReactNode }) {
   const [displayedId, setDisplayedId] = useState(selectedId);
   const displayedRef = useRef(selectedId);
   const [reducedMotion, setReducedMotion] = useState(() => window.matchMedia(motionQuery).matches);
@@ -86,9 +86,10 @@ export default function CacoFlavor({ selectedId }: { selectedId: string }) {
   return (
     <div className="flavor-scene" style={{ backgroundColor: displayed.color }} data-flavor={displayed.id}>
       <article id="sabor-destaque" className="site-container flavor-layout" aria-labelledby="selected-flavor-title">
+        <h2 id="sabores-title" className="flavors-heading">Escolha seu sabor.</h2>
         <figure className="caco-presentation">
           <img className="caco-character" src={caco} srcSet={`${cacoSmall} 768w, ${caco} 1024w`}
-            sizes="(max-width: 700px) calc(100vw - 44px), (max-width: 999px) 52vw, 560px"
+            sizes="(max-width: 900px) 240px, 440px"
             alt="Caco, mascote da Coco Cuesta, apresentando o sabor na palma da mão"
             width={1024} height={1536} loading="lazy" decoding="async" />
           <div className="caco-product" ref={productRef}>
@@ -103,10 +104,20 @@ export default function CacoFlavor({ selectedId }: { selectedId: string }) {
             </svg>
           </div>
         </figure>
-        <div className="flavor-caption" ref={captionRef}>
-          <h3 id="selected-flavor-title">{displayed.name}</h3>
-          <p>{displayed.description}</p>
+        <div className="flavor-caption">
+          <div className="flavor-caption-current" ref={captionRef}>
+            <h3 id="selected-flavor-title" className="flavor-name">{displayed.name}</h3>
+            <p>{displayed.description}</p>
+          </div>
+          {/* Reserve the tallest text at this width without fixing or clipping its height. */}
+          {flavors.map(flavor => (
+            <div key={flavor.id} className="flavor-caption-size" aria-hidden="true">
+              <span className="flavor-name">{flavor.name}</span>
+              <p>{flavor.description}</p>
+            </div>
+          ))}
         </div>
+        {selector}
       </article>
       <p className="sr-only" role="status" aria-live="polite" aria-atomic="true">{displayed.name}. {displayed.description}</p>
     </div>
