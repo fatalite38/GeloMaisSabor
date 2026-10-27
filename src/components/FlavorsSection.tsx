@@ -56,15 +56,22 @@ export default function FlavorsSection() {
 
   return (
     <section id="produtos" className="flavors-section" aria-labelledby="sabores-title">
-      <div className="site-container">
-        <div className="flavors-heading">
-          <h2 id="sabores-title">Escolha seu sabor.</h2>
-        </div>
+      <CacoFlavor selectedId={selectedId} selector={
         <div className="flavor-selector" ref={selectorRef} role="group" aria-label="Escolher sabor Coco Cuesta"
           onKeyDown={event => {
             if (event.altKey || event.ctrlKey || event.metaKey) return;
             const current = flavors.findIndex(flavor => flavor.id === (event.target as HTMLButtonElement).dataset.flavor);
-            if (current < 0 || !['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+            if (current < 0) return;
+            if (event.key === 'Tab') {
+              const next = current + (event.shiftKey ? -1 : 1);
+              if (next >= 0 && next < flavors.length) {
+                // Keep focus movement inside the rail from scrolling the page.
+                event.preventDefault();
+                selectorRef.current?.querySelector<HTMLButtonElement>(`[data-flavor="${flavors[next].id}"]`)?.focus({ preventScroll: true });
+              }
+              return;
+            }
+            if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
             event.preventDefault();
             const next = event.key === 'Home' ? 0 : event.key === 'End' ? flavors.length - 1
               : (current + (event.key === 'ArrowRight' ? 1 : -1) + flavors.length) % flavors.length;
@@ -85,8 +92,7 @@ export default function FlavorsSection() {
             </button>
           ))}
         </div>
-      </div>
-      <CacoFlavor selectedId={selectedId} />
+      } />
     </section>
   );
 }
