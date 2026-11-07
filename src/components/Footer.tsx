@@ -219,7 +219,7 @@ const Footer: React.FC = () => {
         </div>
         <div className="contact-credits">
           <p>&copy; {new Date().getFullYear()} <span translate="no">Coco Cuesta</span>. Todos os direitos reservados.</p>
-          <a href="https://www.linkedin.com/in/luiz-dpedrozo/" target="_blank" rel="noopener noreferrer">
+          <a href="https://luizpedrozo.vercel.app/" target="_blank" rel="noopener noreferrer">
             Desenvolvido por Luiz Fernando
           </a>
         </div>
